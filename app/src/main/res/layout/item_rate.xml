@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+
+
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="5dp"
+    >
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <!--text view for displaying our note text-->
+        <TextView
+            android:id="@+id/rate_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:paddingLeft="10dp"
+             android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="TND"
+
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!--text view for displaying our last updated text-->
+        <TextView
+            android:id="@+id/rate_value"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/img"
+            android:gravity="right"
+            android:text="3.9558741"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <!--imageview for displaying delete icon-->
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+
+            android:src="@drawable/ic_rate"
+            app:tint="#f0b90b" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
