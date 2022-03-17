@@ -22,26 +22,29 @@
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:paddingLeft="10dp"
-             android:layout_centerVertical="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:text="TND"
-
-            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textColor="#05595B"
             android:textSize="18sp" />
 
         <!--text view for displaying our last updated text-->
         <TextView
-            android:id="@+id/rate_value"
 
-            android:layout_width="match_parent"
+            android:id="@+id/rate_value"
+            android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@id/img"
+            android:background="@drawable/value_rate_shape"
             android:gravity="right"
             android:text="3.9558741"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textColor="#062C30"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!--imageview for displaying delete icon-->
         <ImageView
@@ -52,7 +55,7 @@
             android:layout_centerVertical="true"
 
             android:src="@drawable/ic_rate"
-            app:tint="#f0b90b" />
+            app:tint="#062C30" />
     </RelativeLayout>
 
 

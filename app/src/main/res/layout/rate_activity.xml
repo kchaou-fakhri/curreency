@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/label_menu"
         app:layout_constraintEnd_toEndOf="@+id/rateRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/label_menu"
-        app:tint="#f0b90b" />
+        app:tint="#388E3C" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
