@@ -16,19 +16,20 @@ public class RateVM {
         rateRepository = new RateRepository(mainActivity);
     }
 
-    public void getData(){
-        rateRepository.getData();
+    public void callApi(){
+        rateRepository.callApi();
     }
 
     public ArrayList<Rate> getList(){
         return rateRepository.getList();
     }
 
+
     public ArrayList<Rate>  convert(Double baseValue,String base ) {
 
         Double original_base, temp = 0.0, temp_convert;
         temp = Double.valueOf(rateRepository.getValueOfMap(base));
-      // temp = 1/temp;
+
 
         ArrayList<Rate> _rate = new ArrayList<Rate>();
         for(Rate rate: getList()){

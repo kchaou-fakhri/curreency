@@ -37,19 +37,15 @@ public class RateRepository {
         return rates;
     }
 
-    public void getData(){
+    public void callApi(){
         call.clone().enqueue(new Callback<ApiRate>() {
             @Override
             public void onResponse(Call<ApiRate> call, Response<ApiRate> response) {
-                data.put("USA","1");
-                data.putAll(response.body().getData());
-                for(Map.Entry<String, String> entry : data.entrySet()) {
-                    Rate rate = new Rate();
-                    rate.setId(entry.getKey());
-                    rate.setValue(entry.getValue());
-                    rates.add(rate);
 
-                }
+                data.putAll(response.body().getData());
+
+                updateData(data);
+
 
              //   Log.e("Main","-------------------------"+rates.get(1).getValue()+ " "+rates.size());
 
@@ -69,5 +65,27 @@ public class RateRepository {
         return data.get(id);
     }
 
+    private void updateData(HashMap<String ,String > data){
+
+
+        if(rates.size() == 0){
+            for(Map.Entry<String, String> entry : data.entrySet()) {
+                Rate rate = new Rate();
+                rate.setId(entry.getKey());
+                rate.setValue(entry.getValue());
+                rate.setLast_value(entry.getValue());
+                rates.add(rate);
+
+            }
+        }
+        else {
+            for (Rate rate: rates){
+                rate.setLast_value(rate.getValue());
+                rate.setValue(data.get(rate.getId()));
+            }
+
+        }
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.rates;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,17 @@ public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
 
         holder.rate_name.setText(list.get(position).getId());
         holder.rate_value.setText(list.get(position).getValue());
+        if(Double.valueOf(list.get(position).getValue()) >
+                Double.valueOf(list.get(position).getLast_value()) &&
+                Double.valueOf(list.get(position).getValue()) < Double.valueOf(list.get(position).getLast_value()) *2 ){
+
+            holder.rate_value.setTextColor((Color.parseColor("#388E3C")));
+        }
+         if (Double.valueOf(list.get(position).getValue()) < Double.valueOf(list.get(position).getLast_value())
+                 &&
+                 Double.valueOf(list.get(position).getValue()) > Double.valueOf(list.get(position).getLast_value()) *2){
+            holder.rate_value.setTextColor((Color.parseColor("#F44336")));
+        }
 
     }
 

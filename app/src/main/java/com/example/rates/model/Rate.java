@@ -1,6 +1,22 @@
 package com.example.rates.model;
 
 public class Rate {
+
+
+    private String last_value;
+    private String id;
+    private String value;
+
+
+    public String getLast_value() {
+        return last_value;
+    }
+
+    public void setLast_value(String last_value) {
+        this.last_value = last_value;
+    }
+
+
     public String getId() {
         return id;
     }
@@ -9,7 +25,7 @@ public class Rate {
         return value;
     }
 
-    String id;
+
 
     public void setId(String id) {
         this.id = id;
@@ -19,5 +35,5 @@ public class Rate {
         this.value = value;
     }
 
-    String value;
+
 }

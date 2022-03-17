@@ -23,6 +23,9 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+    Boolean ifGetData = false, exit = false;
+    RateAdapter rateAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +34,21 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.rate_activity);
+
+
+
         RateVM rateVM = new RateVM(this);
 
-        Thread t = new Thread() {
+        Thread  t= new Thread() {
             public void run() {
-                while(true){
+                while(!exit){
 
 
-                    rateVM.getData();
+
                     try {
-                        Thread.sleep(3000);
+                        rateVM.callApi();
+                        Thread.sleep(5000);
+
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -63,18 +71,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            EditText base = findViewById(R.id.base);
-            EditText rate = findViewById(R.id.menu);
+        EditText base = findViewById(R.id.base);
+        EditText rate = findViewById(R.id.menu);
 
-           ImageButton btnConvert = findViewById(R.id.btn_convert);
+        ImageButton btnConvert = findViewById(R.id.btn_convert);
 
 
         btnConvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                exit = true;
                Double _base = Double.valueOf(base.getText().toString());
                String _rate = rate.getText().toString();
+               updateUI( rateVM.convert(_base, _rate) );
 
-                updateUI( rateVM.convert(_base, _rate) );
+
 
             }
         });
@@ -90,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
     public void showRates(ArrayList<Rate> list){
 
         ArrayList<String> _list = new ArrayList<String>();
-        Log.e("Main","-------------------------"+list.get(1).getValue()+ " "+list.size());
 
         for (Rate item: list) {
             _list.add(item.getId());
@@ -106,13 +115,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateUI(ArrayList<Rate> rates){
-        RecyclerView recyclerView = findViewById(R.id.rateRecyclerView);
 
-        RateAdapter rateAdapter = new RateAdapter(rates);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(rateAdapter);
+        if (ifGetData == false){
+            RecyclerView recyclerView = findViewById(R.id.rateRecyclerView);
+
+            rateAdapter = new RateAdapter(rates);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(rateAdapter);
+            ifGetData =true;
+        }
+        else {
+            rateAdapter.notifyDataSetChanged();
+        }
+
     }
 
 }
