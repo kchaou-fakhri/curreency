@@ -14,20 +14,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
 
+
+            />
+        <LinearLayout
+            android:layout_width="wrap_content" android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img">
         <!--text view for displaying our note text-->
         <TextView
             android:id="@+id/rate_name"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:paddingLeft="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:text="TND"
-            android:textStyle="bold"
-            android:textColor="#05595B"
-            android:textSize="18sp" />
+
+
+
+            android:layout_marginTop="15dp"
+
+
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="15dp"
+            android:text="Tunisia"
+            android:textColor="#2C2D32"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rate_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+
+                android:layout_marginTop="5dp"
+
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="18dp"
+                android:text="TND"
+                android:textColor="#05595B"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!--text view for displaying our last updated text-->
         <TextView
@@ -38,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/img"
+            android:layout_alignParentRight="true"
             android:background="@drawable/value_rate_shape"
             android:gravity="right"
             android:text="3.9558741"
@@ -47,15 +83,7 @@
             android:textStyle="bold" />
 
         <!--imageview for displaying delete icon-->
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
 
-            android:src="@drawable/ic_rate"
-            app:tint="#062C30" />
     </RelativeLayout>
 
 

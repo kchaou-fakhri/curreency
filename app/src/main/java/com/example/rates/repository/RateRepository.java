@@ -10,8 +10,12 @@ import com.example.rates.model.ApiRate;
 import com.example.rates.model.Rate;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +27,7 @@ public class RateRepository {
     ArrayList<Rate> rates;
     MainActivity mainActivity;
     HashMap<String, String> data = new HashMap<String, String>();
-
+    static HashMap<String, String> rateName = new HashMap<>() ;
     Methods methods = RetrofitClient.getInstance().create(Methods.class);
     Call<ApiRate> call = methods.getAllData();
 
@@ -31,6 +35,7 @@ public class RateRepository {
     public RateRepository(MainActivity mainActivity){
         rates = new ArrayList<>();
         this.mainActivity = mainActivity;
+        getAllCurrencies();
     }
 
     public ArrayList<Rate> getList() {
@@ -42,21 +47,14 @@ public class RateRepository {
             @Override
             public void onResponse(Call<ApiRate> call, Response<ApiRate> response) {
 
-                data.putAll(response.body().getData());
-
-                updateData(data);
-
-
-             //   Log.e("Main","-------------------------"+rates.get(1).getValue()+ " "+rates.size());
-
-                    mainActivity.showRates(rates);
+                 data.putAll(response.body().getData());
+                 updateData(data);
                  mainActivity.updateUI(rates);
+
             }
 
             @Override
             public void onFailure(Call<ApiRate> call, Throwable t) {
-
-                Log.e("Main","------------------------- not working");
             }
         });
     }
@@ -70,13 +68,19 @@ public class RateRepository {
 
         if(rates.size() == 0){
             for(Map.Entry<String, String> entry : data.entrySet()) {
-                Rate rate = new Rate();
-                rate.setId(entry.getKey());
-                rate.setValue(entry.getValue());
-                rate.setLast_value(entry.getValue());
-                rates.add(rate);
+                if(rateName.get(entry.getKey()) !=null){
+                    Rate rate = new Rate();
+                    rate.setId(entry.getKey());
+                    rate.setName(rateName.get(entry.getKey()));
+                    rate.setValue(entry.getValue());
+                    rate.setLast_value(entry.getValue());
+                    rates.add(rate);
+                }
+
 
             }
+
+           mainActivity.showRates(rates);
         }
         else {
             for (Rate rate: rates){
@@ -86,6 +90,29 @@ public class RateRepository {
 
         }
 
+    }
+
+
+    public static Set<Currency> getAllCurrencies()
+    {
+        Set<Currency> toret = new HashSet<Currency>();
+        Locale[] locs = Locale.getAvailableLocales();
+
+        for(Locale loc : locs) {
+            try {
+                Currency currency = Currency.getInstance( loc );
+
+                if ( currency != null ) {
+                   rateName.put(currency.getCurrencyCode(), currency.getDisplayName());
+
+                }
+            } catch(Exception exc)
+            {
+                // Locale not found
+            }
+        }
+
+        return toret;
     }
 
 }

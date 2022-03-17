@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -19,7 +20,10 @@ import com.example.rates.model.Rate;
 import com.example.rates.viewmodel.RateVM;
 
 import java.util.ArrayList;
-
+import java.util.Currency;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.rate_activity);
 
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
+
+        EditText base = findViewById(R.id.base);
+        EditText rate = findViewById(R.id.menu);
+
+        Button btnConvert = findViewById(R.id.btn_convert);
 
 
         RateVM rateVM = new RateVM(this);
@@ -42,12 +52,9 @@ public class MainActivity extends AppCompatActivity {
         Thread  t= new Thread() {
             public void run() {
                 while(!exit){
-
-
-
                     try {
                         rateVM.callApi();
-                        Thread.sleep(5000);
+                        Thread.sleep(20000);
 
 
                     } catch (InterruptedException e) {
@@ -62,19 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
 
-
-
-
-
-
-
-
-        EditText base = findViewById(R.id.base);
-        EditText rate = findViewById(R.id.menu);
-
-        ImageButton btnConvert = findViewById(R.id.btn_convert);
 
 
         btnConvert.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
     public void showRates(ArrayList<Rate> list){

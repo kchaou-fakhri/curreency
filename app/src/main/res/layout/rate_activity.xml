@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+        android:background="@color/white"
     tools:context=".MainActivity"
     tools:visibility="visible">
 
@@ -62,6 +62,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textField"
         app:layout_constraintEnd_toStartOf="@+id/btn_convert"
         app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginRight="10dp"
         app:layout_constraintStart_toEndOf="@+id/textField"
         app:layout_constraintTop_toTopOf="@+id/textField"
         app:layout_constraintVertical_bias="0.0">
@@ -77,12 +78,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
+    <Button
         android:id="@+id/btn_convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_change"
+        android:background="@drawable/value_rate_shape"
+        android:backgroundTint="#062C30"
+        android:text="Convert"
+        android:padding="5dp"
+       android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+
         app:layout_constraintBottom_toBottomOf="@+id/label_menu"
         app:layout_constraintEnd_toEndOf="@+id/rateRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/label_menu"
