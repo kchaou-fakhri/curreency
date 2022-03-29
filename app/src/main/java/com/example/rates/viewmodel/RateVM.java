@@ -1,8 +1,8 @@
 package com.example.rates.viewmodel;
 
-import com.example.rates.MainActivity;
-import com.example.rates.model.Rate;
-import com.example.rates.repository.RateRepository;
+import com.example.rates.view.MainActivity;
+import com.example.rates.model.entity.Rate;
+import com.example.rates.model.repository.RateRepository;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

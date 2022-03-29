@@ -20,8 +20,9 @@
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/rate_activity.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable-v24/value_rate_shape.xml" value="0.1695" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
-        <entry key="app/src/main/res/layout/item_rate.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/item_rate.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/loading_alert.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/rate_activity.xml" value="0.19739583333333333" />
       </map>
     </option>

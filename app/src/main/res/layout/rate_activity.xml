@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
         android:background="@color/white"
-    tools:context=".MainActivity"
+    tools:context=".view.MainActivity"
     tools:visibility="visible">
 
 
@@ -56,7 +56,6 @@
 
 
         android:layout_marginLeft="5dp"
-        app:endIconMode="clear_text"
         app:helperText=""
         app:helperTextTextColor="#dd0000"
         app:layout_constraintBottom_toBottomOf="@+id/textField"
