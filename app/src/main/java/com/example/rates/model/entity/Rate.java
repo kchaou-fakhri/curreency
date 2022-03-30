@@ -1,14 +1,29 @@
 package com.example.rates.model.entity;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
+@Entity
 public class Rate {
 
 
-    private String last_value;
+
+    @PrimaryKey
+    @NonNull
     private String id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "value")
     private String value;
+    @Embedded
+    private String last_value;
 
 
 
@@ -45,8 +60,8 @@ public class Rate {
         this.value = value;
     }
 
-
-   public HashMap<String, String> data = new HashMap<String, String>();
+    @Embedded
+    public HashMap<String, String> data = new HashMap<String, String>();
 
 
 
@@ -55,6 +70,10 @@ public class Rate {
 
     public HashMap<String, String> getData() {
         return  data;
+    }
+
+    public String toString(){
+        return name +"=========>" +id + " : "+value;
     }
 
 

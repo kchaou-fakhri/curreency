@@ -1,5 +1,7 @@
 package com.example.rates.view;
 
+import android.app.Application;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.rates.R;
 import com.example.rates.model.entity.Rate;
 import com.example.rates.viewmodel.RateVM;
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     RateAdapter rateAdapter;
 
 
-
+    AlertDialog builder ;
 
 
     @Override
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.rate_activity);
 
 
+        builder = new AlertDialog.Builder(this)
+        .setView(R.layout.loading_alert)
+        .setCancelable(false)
+        .create();
 
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
@@ -51,23 +58,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         RateVM rateVM = new RateVM(this);
-
-        Thread  t= new Thread() {
-            public void run() {
-                while(!exit){
-                    try {
-                        rateVM.callApi();
-                        Thread.sleep(5000);
-
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        };
-        t.start();
+        rateVM.callApi();
+//        Thread  t= new Thread() {
+//            public void run() {
+//                while(!exit){
+//                    try {
+//                        rateVM.callApi();
+//                        Thread.sleep(5000);
+//
+//
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            }
+//        };
+//        t.start();
 
 
 
@@ -116,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI(ArrayList<Rate> rates){
 
+            builder.dismiss();
         if (ifGetData == false){
             RecyclerView recyclerView = findViewById(R.id.rateRecyclerView);
 
@@ -129,6 +137,28 @@ public class MainActivity extends AppCompatActivity {
         else {
             rateAdapter.notifyDataSetChanged();
         }
+
+    }
+
+    public void showAlertIfNoConnection(){
+       AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+       builder.setTitle("Error");
+       builder.setMessage("No connection");
+       builder.setCancelable(false);
+
+       builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialogInterface, int i) {
+
+           }
+       });
+       builder.setNegativeButton("exit", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+
+                   }
+               });
+       builder.show();
 
     }
 
