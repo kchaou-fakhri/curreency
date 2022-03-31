@@ -143,21 +143,15 @@ public class MainActivity extends AppCompatActivity {
     public void showAlertIfNoConnection(){
        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
        builder.setTitle("Error");
-       builder.setMessage("No connection");
+       builder.setMessage("Check your internet connection and try again.");
        builder.setCancelable(false);
-
-       builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+       builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialogInterface, int i) {
-
+               System.exit(1);
            }
        });
-       builder.setNegativeButton("exit", new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(DialogInterface dialogInterface, int i) {
 
-                   }
-               });
        builder.show();
 
     }

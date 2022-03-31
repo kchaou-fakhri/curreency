@@ -30,9 +30,9 @@ import retrofit2.Response;
 public class RateRepository {
 
 
-    ArrayList<Rate> rates;
-    MainActivity mainActivity;
-    HashMap<String, String> data = new HashMap<String, String>();
+   private ArrayList<Rate> rates;
+    private MainActivity mainActivity;
+    private HashMap<String, String> data = new HashMap<String, String>();
     static HashMap<String, String> rateName = new HashMap<>() ;
     Methods methods = RetrofitClient.getInstance().create(Methods.class);
     Call<Rate> call = methods.getAllData();
@@ -64,19 +64,20 @@ public class RateRepository {
                     @Override
                     public void run() {
                         // Insert Data
-                        rates.addAll(rateDAO.getAll());
+                        //rates.addAll(rateDAO.getAll());
+                           Log.println(Log.ASSERT, "response : ", "oijoiejrqg");
 
-                           Log.println(Log.ASSERT, "response : ",
-                                   String.valueOf(rates.size()));
+                        for (Rate item : rateDAO.getAll()){
+                            data.put(item.getId(), item.getValue());
+                        }
+                        updateData(data);
 
-                        if (rates.size() == 0){
+
+                        if (data.size() == 0){
                             mainActivity.showAlertIfNoConnection();
                             return;
                         }
-                        else {
-                            mainActivity.updateUI(rates);
-                            mainActivity.showRates(rates);
-                        }
+
 
 
 
@@ -93,33 +94,32 @@ public class RateRepository {
             @Override
             public void onResponse(Call<Rate> call, Response<Rate> response) {
 
-                // data.putAll(response.body().getData());
-                for(Map.Entry<String, String> entry : response.body().data.entrySet()) {
-//                  Log.println(Log.ASSERT, "response : ", entry.getValue());
-                    Rate rate = new Rate();
-                    rate.setId(entry.getKey());
-                    rate.setName(rateName.get(entry.getKey()));
-                    rate.setValue(entry.getValue());
-                    rate.setLast_value(entry.getValue());
-                    rates.add(rate);
+                data.putAll(response.body().getData());
+//                for(Map.Entry<String, String> entry : response.body().data.entrySet()) {
+////                  Log.println(Log.ASSERT, "response : ", entry.getValue());
+//                    Rate rate = new Rate();
+//                    rate.setId(entry.getKey());
+//                    rate.setName(rateName.get(entry.getKey()));
+//                    rate.setValue(entry.getValue());
+//                    rate.setLast_value(entry.getValue());
+//                    rates.add(rate);
+//
+//                    AsyncTask.execute(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            // Insert Data
+//                            rateDAO.insert(rate);
+//
+//                            // Get Data
+//
+//                        }
+//                    });
+//
+//                }
 
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Insert Data
-                            rateDAO.insert(rate);
 
-                            // Get Data
+               updateData(data);
 
-                        }
-                    });
-
-                }
-
-
-//               updateData(rates);
-                 mainActivity.updateUI(rates);
-                mainActivity.showRates(rates);
 
             }
 
@@ -167,8 +167,15 @@ public class RateRepository {
 
 
             }
+            if (rates.size() == 0){
+                mainActivity.showAlertIfNoConnection();
+                return;
+            }
+            else {
+                mainActivity.updateUI(rates);
+                mainActivity.showRates(rates);
+            }
 
-           mainActivity.showRates(rates);
         }
         else {
             for (Rate rate: rates){
