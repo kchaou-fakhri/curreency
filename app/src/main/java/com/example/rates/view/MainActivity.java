@@ -1,9 +1,7 @@
 package com.example.rates.view;
 
-import android.app.Application;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,15 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rates.R;
 import com.example.rates.model.entity.Rate;
 import com.example.rates.viewmodel.RateVM;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+
     Boolean ifGetData = false, exit = false;
     RateAdapter rateAdapter;
-
-
     AlertDialog builder ;
 
 
@@ -59,28 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         RateVM rateVM = new RateVM(this);
         rateVM.callApi();
-//        Thread  t= new Thread() {
-//            public void run() {
-//                while(!exit){
-//                    try {
-//                        rateVM.callApi();
-//                        Thread.sleep(5000);
-//
-//
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//            }
-//        };
-//        t.start();
-
-
-
-
-
-
 
         btnConvert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -89,20 +65,9 @@ public class MainActivity extends AppCompatActivity {
                String _rate = rate.getText().toString();
                updateUI( rateVM.convert(_base, _rate) );
 
-
-
             }
         });
-
-
-//        Methods methods = RetrofitClient.getInstance().create(Methods.class);
-//        Call<Rate> call = methods.getAllData();
-
-
     }
-
-
-
 
     public void showRates(ArrayList<Rate> list){
 
@@ -141,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showAlertIfNoConnection(){
-       AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this,
+                androidx.appcompat.R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
+       builder.setIcon(R.drawable.ic_no_wifi);
        builder.setTitle("Error");
        builder.setMessage("Check your internet connection and try again.");
        builder.setCancelable(false);
@@ -157,8 +124,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
 }
+
+
+//        Thread  t= new Thread() {
+//            public void run() {
+//                while(!exit){
+//                    try {
+//                        rateVM.callApi();
+//                        Thread.sleep(5000);
+//
+//
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            }
+//        };
+//        t.start();

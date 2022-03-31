@@ -30,14 +30,13 @@ import retrofit2.Response;
 public class RateRepository {
 
 
-   private ArrayList<Rate> rates;
-    private MainActivity mainActivity;
-    private HashMap<String, String> data = new HashMap<String, String>();
-    static HashMap<String, String> rateName = new HashMap<>() ;
-    Methods methods = RetrofitClient.getInstance().create(Methods.class);
-    Call<Rate> call = methods.getAllData();
-    AppDatabase db;
-
+    private ArrayList<Rate> rates;                                          /******** Create List of currency *****************************/
+    private MainActivity mainActivity;                                      /******** get Context  ****************************************/
+    private HashMap<String, String> data = new HashMap<String, String>();                /******** to Save Currency in temp Hashmap ********************/
+    static HashMap<String, String> rateName = new HashMap<>() ;             /******** to Save name of century in temp Hashmap *************/
+    Methods methods = RetrofitClient.getInstance().create(Methods.class);   /******** Create Instance of RetrofitClient *******************/
+    Call<Rate> call = methods.getAllData();                                 /******** Get data from getAllData methode of RetrofitClient **/
+    AppDatabase db;                                                         /******** Create Instance of Database *************************/
 
 
     public RateRepository(MainActivity mainActivity){
@@ -49,10 +48,7 @@ public class RateRepository {
 
     }
 
-    public ArrayList<Rate> getList() {
-        return rates;
-    }
-
+    /******** this function to get data from API  *********************/
     public void callApi(){
 
         RateDAO rateDAO = db.rateDAO();
@@ -64,80 +60,37 @@ public class RateRepository {
                     @Override
                     public void run() {
                         // Insert Data
-                        //rates.addAll(rateDAO.getAll());
-                           Log.println(Log.ASSERT, "response : ", "oijoiejrqg");
-
                         for (Rate item : rateDAO.getAll()){
                             data.put(item.getId(), item.getValue());
                         }
-                        updateData(data);
-
 
                         if (data.size() == 0){
                             mainActivity.showAlertIfNoConnection();
                             return;
                         }
-
-
-
-
+                        else
+                        {
+                            updateData(data);
+                        }
                     }
-
-
                 });
-
-
-             //   Log.println(Log.ASSERT, "response : ", String.valueOf(rates.get(1).getValue()));
-
             }
 
             @Override
             public void onResponse(Call<Rate> call, Response<Rate> response) {
-
                 data.putAll(response.body().getData());
-//                for(Map.Entry<String, String> entry : response.body().data.entrySet()) {
-////                  Log.println(Log.ASSERT, "response : ", entry.getValue());
-//                    Rate rate = new Rate();
-//                    rate.setId(entry.getKey());
-//                    rate.setName(rateName.get(entry.getKey()));
-//                    rate.setValue(entry.getValue());
-//                    rate.setLast_value(entry.getValue());
-//                    rates.add(rate);
-//
-//                    AsyncTask.execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // Insert Data
-//                            rateDAO.insert(rate);
-//
-//                            // Get Data
-//
-//                        }
-//                    });
-//
-//                }
-
-
                updateData(data);
-
-
             }
-
-
-
         });
-
-
     }
 
+    /******** this function to get data from API  *********************/
     public Rate getValue(String id){
-
         RateDAO rateDAO = db.rateDAO();
-
-
         return rateDAO.getById(id);
     }
 
+    /******** this function to update data in Hashmap and insert new data to database  *********************/
     private void updateData(HashMap<String ,String > data){
 
         RateDAO rateDAO = db.rateDAO();
@@ -151,21 +104,15 @@ public class RateRepository {
                     rate.setValue(entry.getValue());
                     rate.setLast_value(entry.getValue());
                     rates.add(rate);
+
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
-                            // Insert Data
+                            /******Insert Rate to database *****/
                             rateDAO.insert(rate);
-
-                            // Get Data
-
                         }
                     });
-
-
                 }
-
-
             }
             if (rates.size() == 0){
                 mainActivity.showAlertIfNoConnection();
@@ -175,7 +122,6 @@ public class RateRepository {
                 mainActivity.updateUI(rates);
                 mainActivity.showRates(rates);
             }
-
         }
         else {
             for (Rate rate: rates){
@@ -187,7 +133,7 @@ public class RateRepository {
 
     }
 
-
+    /******** this function to get name of currency *********************/
     public static Set<Currency> getAllCurrencies()
     {
         Set<Currency> toret = new HashSet<Currency>();
@@ -210,12 +156,22 @@ public class RateRepository {
         return toret;
     }
 
-
+    /******** this function to get all currency from database ************/
     public LiveData<ArrayList<Rate>> getAll(){
         RateDAO rateDAO = db.rateDAO();
         MutableLiveData mutableLiveData = new MutableLiveData();
         mutableLiveData.setValue(rateDAO.getAll());
         return mutableLiveData;
+    }
+
+    /******** this function to return list of currency ******************/
+    public ArrayList<Rate> getList() {
+        return rates;
+    }
+
+    /******** this function to return value of currency from HashMap *****/
+    public String getValueOfMap(String id){
+        return data.get(id);
     }
 
 
