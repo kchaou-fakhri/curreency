@@ -145,10 +145,11 @@ public class MainActivity extends AppCompatActivity {
        builder.setTitle("Error");
        builder.setMessage("Check your internet connection and try again.");
        builder.setCancelable(false);
-       builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+       builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialogInterface, int i) {
-               System.exit(1);
+               finish();
+               startActivity(getIntent());
            }
        });
 
