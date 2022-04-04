@@ -5,8 +5,8 @@
     android:layout_height="80dp"
 
 
-    android:layout_marginTop="4dp"
-    app:cardCornerRadius="5dp"
+
+
     >
 
     <RelativeLayout
@@ -14,13 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <ImageView
+
             android:id="@+id/img"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/re"
 
 
             />
@@ -31,37 +34,32 @@
             android:layout_toRightOf="@id/img">
         <!--text view for displaying our note text-->
         <TextView
-            android:id="@+id/rate_name"
+            android:id="@+id/rate_code"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
-
             android:layout_marginTop="15dp"
-
-
             android:layout_marginBottom="0dp"
             android:paddingLeft="15dp"
-            android:text="Tunisia"
-            android:textColor="#2C2D32"
-            android:textSize="20sp"
+            android:text="TND"
+            android:textColor="#454548"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/rate_code"
+                android:id="@+id/rate_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:layout_centerVertical="true"
 
                 android:layout_marginTop="5dp"
-
+android:textSize="10sp"
                 android:layout_marginBottom="0dp"
-                android:paddingLeft="18dp"
-                android:text="TND"
-                android:textColor="#05595B"
-                android:textSize="10sp"
+                android:paddingLeft="15dp"
+                android:text="Tunisia"
+                android:textColor="#8b8b8b"
+
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -70,24 +68,28 @@
 
             android:id="@+id/rate_value"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/value_rate_shape"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bookmark"
             android:gravity="right"
             android:text="3.9558741"
-            android:textColor="#062C30"
-            android:textSize="20sp"
+            android:textColor="#4a4a4a"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_bookmark"
+            app:tint="#435bb9" />
         <!--imageview for displaying delete icon-->
 
     </RelativeLayout>
+
 
 
 </androidx.cardview.widget.CardView>

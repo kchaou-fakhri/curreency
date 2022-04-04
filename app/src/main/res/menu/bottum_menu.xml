@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_refresh"
+        android:title=""/>
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookmark"
+        android:title=""/>
+
+    <item
+        android:id="@+id/create_post"
+        android:enabled="true"
+        android:icon="@drawable/ic_refresh"
+        android:title=""/>
+
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        app:icon="@drawable/ic_news"
+        android:title=""/>
+
+    <item
+        android:id="@+id/person"
+        android:enabled="true"
+        android:icon="@drawable/ic_person"
+        android:title=""/>
+</menu>

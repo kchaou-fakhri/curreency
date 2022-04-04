@@ -43,7 +43,7 @@ public class RateVM extends ViewModel {
         ArrayList<Rate> _rate = new ArrayList<Rate>();
         for(Rate rate: getList()){
             original_base = Double.valueOf(rateRepository.getValueOfMap(rate.getId()));
-            temp_convert= Double.parseDouble(new DecimalFormat("##.####").format(original_base/temp));
+            temp_convert= original_base/temp;
             rate.setValue(String.valueOf(temp_convert*baseValue));
             _rate.add(rate);
         }

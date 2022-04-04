@@ -57,11 +57,18 @@
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/list_item.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/rate_activity.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable-v24/value_rate_shape.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.1855" />
+        <entry key="app/src/main/res/drawable/ic_news.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_notifications.xml" value="0.205" />
+        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.159" />
+        <entry key="app/src/main/res/drawable/name_of_item.xml" value="0.1855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/item_rate.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/list_item_of_rate.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/loading_alert.xml" value="0.19739583333333333" />
-        <entry key="app/src/main/res/layout/rate_activity.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/rate_activity.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/bottum_menu.xml" value="0.19739583333333333" />
       </map>
     </option>
   </component>
