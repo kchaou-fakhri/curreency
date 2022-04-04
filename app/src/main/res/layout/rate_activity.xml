@@ -13,44 +13,34 @@
     <RelativeLayout
         android:id="@+id/shape"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="120dp"
 
         android:orientation="vertical"
-        android:background="#435bb9"
+        android:background="#3342b4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@id/date"
-            android:background="#435bb9"
-            android:src="@drawable/ic_refresh"
-            app:tint="@color/white" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/date"
-            android:background="#435bb9"
-            android:src="@drawable/ic_notifications"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="10dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_settings"
             app:tint="@color/white" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
+            android:layout_marginTop="30dp"
             android:text="20 FEBRUARY 2022 - 11:26"
             android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:textSize="17dp" />
 
         <RelativeLayout
             android:layout_alignParentBottom="true"
@@ -167,7 +157,8 @@
         android:layout_marginRight="10dp"
         app:layout_constraintStart_toEndOf="@+id/textField"
         app:layout_constraintTop_toTopOf="@+id/textField"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="NotSibling">
 
 
         <AutoCompleteTextView
@@ -180,21 +171,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_convert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/value_rate_shape"
-        android:backgroundTint="#435bb9"
-        android:text="Convert"
-        android:padding="5dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
 
-        app:layout_constraintBottom_toBottomOf="@+id/label_menu"
-        app:layout_constraintEnd_toEndOf="@+id/rateRecyclerView"
-        app:layout_constraintTop_toTopOf="@+id/label_menu"
-        app:tint="#388E3C" />
 
 
     <RelativeLayout
@@ -208,39 +185,58 @@
         app:layout_constraintStart_toStartOf="parent"
 
          >
+
         <ImageButton
             android:id="@+id/chart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_chart"
-            android:background="@color/white"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            />
+            android:layout_marginLeft="35dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_chart" />
 
         <ImageButton
             android:id="@+id/bookmark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bookmark"
-            android:background="@color/white"
-
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/change"
             android:layout_marginRight="40dp"
-            />
+
+            android:layout_toLeftOf="@id/btn_convert"
+            android:background="@color/white"
+            app:tint="#AFACAC"
+            android:src="@drawable/ic_bookmark" />
 
         <ImageButton
-            android:id="@+id/change"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_refresh"
-            app:tint="@color/white"
+            android:id="@+id/btn_convert"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
             android:background="@drawable/circle"
 
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_refresh_35"
+            app:tint="@color/white" />
 
+        <ImageButton
+            android:id="@+id/news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+
+            android:layout_toRightOf="@id/btn_convert"
+            android:background="@color/white"
+            android:src="@drawable/ic_news" />
+
+        <ImageButton
+            android:id="@+id/perf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            android:background="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
             />
 
     </RelativeLayout>

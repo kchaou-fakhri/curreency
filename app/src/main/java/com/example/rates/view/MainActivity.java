@@ -1,14 +1,13 @@
 package com.example.rates.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean ifGetData = false, exit = false;
     RateAdapter rateAdapter;
     AlertDialog builder ;
+    ArrayList<String> codesRate;
 
 
     @Override
@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         EditText base = findViewById(R.id.base);
         EditText rate = findViewById(R.id.menu);
 
-        Button btnConvert = findViewById(R.id.btn_convert);
+        ImageButton btnConvert = findViewById(R.id.btn_convert);
+        ImageButton btnSetting = findViewById(R.id.setting);
 
 
         RateVM rateVM = new RateVM(this);
@@ -65,19 +66,30 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnSetting.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChangeBaseActivity.class);
+                intent.putExtra("codes", codesRate);
+                MainActivity.this.startActivity(intent);
+
+            }
+        });
     }
 
     public void showRates(ArrayList<Rate> list){
 
-        ArrayList<String> _list = new ArrayList<String>();
+        codesRate = new ArrayList<String>();
 
         for (Rate item: list) {
-            _list.add(item.getId());
+            codesRate.add(item.getId());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
-                _list);
+                codesRate);
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.menu);
 
         textView.setAdapter(adapter);

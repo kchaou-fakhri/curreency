@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Manef JDIDI/AppData/Local/platforms/android-32/data/res/layout/list_content.xml" value="0.33" />
+        <entry key="..\:/Users/Manef JDIDI/AppData/Local/platforms/android-32/data/res/layout/simple_dropdown_item_1line.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1865" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable-v24/value_rate_shape.xml" value="0.3185" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ad.xml" value="0.196" />
@@ -12,6 +14,7 @@
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ai.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/al.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/am.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/an.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ao.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/aq.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ar.xml" value="0.196" />
@@ -21,7 +24,16 @@
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/aw.xml" value="0.17" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ax.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/az.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ba.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/bb.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/bd.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/be.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/bf.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/bg.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/bitcoin.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/br.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/btn_bk.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/circle.xml" value="0.3675" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/cr.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/cu.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/cv.xml" value="0.196" />
@@ -30,15 +42,50 @@
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/dj.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/dk.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/do.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/dominican.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ec.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/eg.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/eh.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fg.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fj.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fk.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fm.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fo.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/fr.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ga.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gb.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gb_nir.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gd.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ge.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gf.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gg.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gh.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gi.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/globe.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gm.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gn.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gp.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gq.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gr.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gs.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gu.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gw.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/gy.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/hk.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/hn.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_bookmark.xml" value="0.3675" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_change.xml" value="0.1825" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_chart.xml" value="0.3675" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1865" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_news.xml" value="0.3675" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_no_wifi.xml" value="0.26" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_person.xml" value="0.3675" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_rate.xml" value="0.1865" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_refresh.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_refresh_35.xml" value="0.26" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ic_settings.xml" value="0.3675" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/img_background.xml" value="0.3265" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/name_of_item.xml" value="0.3265" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/sl.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/sn.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/tn.xml" value="0.196" />
@@ -46,10 +93,11 @@
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/vi.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/vu.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/drawable/ws.xml" value="0.196" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/activity_change_base.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/activity_main.xml" value="0.15579710144927536" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/item_rate.xml" value="0.33" />
-        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/list_item.xml" value="0.15579710144927536" />
-        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/rate_activity.xml" value="0.25" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/list_item.xml" value="0.2" />
+        <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/layout/rate_activity.xml" value="0.33" />
         <entry key="..\:/Users/Manef JDIDI/Desktop/curreency/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1865" />
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/drawable/ic_change.xml" value="0.196" />
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
@@ -57,18 +105,11 @@
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/list_item.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Manef JDIDI/Rates/app/src/main/res/layout/rate_activity.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable-v24/value_rate_shape.xml" value="0.1695" />
-        <entry key="app/src/main/res/drawable/circle.xml" value="0.1855" />
-        <entry key="app/src/main/res/drawable/ic_news.xml" value="0.205" />
-        <entry key="app/src/main/res/drawable/ic_notifications.xml" value="0.205" />
-        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.159" />
-        <entry key="app/src/main/res/drawable/name_of_item.xml" value="0.1855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/item_rate.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.19739583333333333" />
-        <entry key="app/src/main/res/layout/list_item_of_rate.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/layout/loading_alert.xml" value="0.19739583333333333" />
-        <entry key="app/src/main/res/layout/rate_activity.xml" value="0.25" />
-        <entry key="app/src/main/res/menu/bottum_menu.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/rate_activity.xml" value="0.19739583333333333" />
       </map>
     </option>
   </component>

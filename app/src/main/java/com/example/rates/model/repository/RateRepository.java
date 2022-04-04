@@ -16,6 +16,8 @@ import com.example.rates.model.data.RetrofitClient;
 import com.example.rates.model.entity.Rate;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -103,6 +105,7 @@ public class RateRepository {
                     rate.setName(rateName.get(entry.getKey()));
                     rate.setValue(entry.getValue());
                     rate.setLast_value(entry.getValue());
+                    rate.setPropriety(getPropriety(entry.getKey()));
                     rates.add(rate);
 
                     AsyncTask.execute(new Runnable() {
@@ -114,6 +117,9 @@ public class RateRepository {
                     });
                 }
             }
+            Collections.sort(rates, new Rate());
+
+
             if (rates.size() == 0){
                 mainActivity.showAlertIfNoConnection();
                 return;
@@ -174,5 +180,20 @@ public class RateRepository {
         return data.get(id);
     }
 
+
+    private int getPropriety(String id){
+        int prop =3;
+        if(id.equals("USD") || id.equals("EUR")  )
+        {
+            prop = 0;
+        }
+        if(id.equals("TND") || id.equals("CAD") || id.equals("SAR") || id.equals("JPY") || id.equals("AUD")){
+            prop = 1;
+        }
+        if(id.equals("KRW") || id.equals("CAD") || id.equals("SAR")  || id.equals("EGP") || id.equals("BRL")){
+            prop = 2;
+        }
+        return prop;
+    }
 
 }
