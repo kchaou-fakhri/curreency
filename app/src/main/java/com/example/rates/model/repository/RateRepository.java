@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
+import com.example.rates.R;
 import com.example.rates.model.data.AppDatabase;
 import com.example.rates.model.data.RateDAO;
 import com.example.rates.view.MainActivity;
@@ -72,6 +73,7 @@ public class RateRepository {
                         }
                         else
                         {
+
                             updateData(data);
                         }
                     }
@@ -98,6 +100,7 @@ public class RateRepository {
         RateDAO rateDAO = db.rateDAO();
 
         if(rates.size() == 0){
+            rates.add(new Rate("ETH","Ethereum","3474.70",1));
             for(Map.Entry<String, String> entry : data.entrySet()) {
                 if(rateName.get(entry.getKey()) != null){
                     Rate rate = new Rate();
@@ -166,6 +169,10 @@ public class RateRepository {
             }
         }
 
+        rateName.put("BTC", "Bitcoin");
+        rateName.put("ETH", "Ethereum");
+
+
         return toret;
     }
 
@@ -189,16 +196,19 @@ public class RateRepository {
 
 
     private int getPropriety(String id){
-        int prop =3;
+        int prop =4;
         if(id.equals("USD") || id.equals("EUR")  )
         {
             prop = 0;
         }
-        if(id.equals("TND") || id.equals("CAD") || id.equals("SAR") || id.equals("JPY") || id.equals("AUD")){
+        if(id.equals("BTC") ||  id.equals("ETH")){
             prop = 1;
         }
-        if(id.equals("KRW") || id.equals("CAD") || id.equals("SAR")  || id.equals("EGP") || id.equals("BRL")){
+        if(id.equals("TND") || id.equals("CAD") || id.equals("SAR") || id.equals("JPY") || id.equals("AUD") ) {
             prop = 2;
+        }
+        if(id.equals("KRW") || id.equals("CAD") || id.equals("SAR")  || id.equals("EGP") || id.equals("BRL")){
+            prop = 3;
         }
         return prop;
     }

@@ -60,21 +60,14 @@ public class MainActivity extends AppCompatActivity {
         TextView txtDate = findViewById(R.id.date);
 
 
-        runOnUiThread(new Runnable() {
+        long millis = System.currentTimeMillis();
 
-            @Override
-            public void run() {
+        // creating a new object of the class Date
+        java.util.Date date = new java.util.Date(millis);
 
-
-                Date date = new Date();
-
-
-                txtDate.setText("06/"+getMonthForInt(0)+"/2022");
+        txtDate.setText(date.toString());
 
 
-
-            }
-        });
 
 
 
@@ -97,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
                 rates.clear();
                 rates.addAll(rateVM.getList());
                 rateAdapter.notifyDataSetChanged();
+                long millis = System.currentTimeMillis();
+
+                // creating a new object of the class Date
+                java.util.Date date = new java.util.Date(millis);
+
+                txtDate.setText(date.toString());
+
 
             }
         });

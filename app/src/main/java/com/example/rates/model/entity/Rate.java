@@ -15,7 +15,13 @@ import java.util.HashMap;
 @Entity
 public class Rate implements Comparator<Rate> {
 
-
+    public Rate( String id, String name, String value, int propriety) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.propriety = propriety;
+    }
+    public Rate(){}
 
     @PrimaryKey
     @NonNull
