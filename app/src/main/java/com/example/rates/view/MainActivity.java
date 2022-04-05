@@ -1,13 +1,19 @@
 package com.example.rates.view;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.LogPrinter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +27,9 @@ import com.example.rates.model.entity.Rate;
 import com.example.rates.viewmodel.RateVM;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,42 +38,72 @@ public class MainActivity extends AppCompatActivity {
     RateAdapter rateAdapter;
     AlertDialog builder ;
     ArrayList<String> codesRate;
+    ArrayList<Rate> rates;
+    String _value;
+    String _rate;
+    RateVM rateVM;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.rate_activity);
-
+        rates = new ArrayList<>();
 
         builder = new AlertDialog.Builder(this)
         .setView(R.layout.loading_alert)
         .setCancelable(false)
-        .create();
+        .show();
 
-
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
-
-        EditText base = findViewById(R.id.base);
-        EditText rate = findViewById(R.id.menu);
-
-        ImageButton btnConvert = findViewById(R.id.btn_convert);
-        ImageButton btnSetting = findViewById(R.id.setting);
-
-
-        RateVM rateVM = new RateVM(this);
+        rateVM = new RateVM(this);
         rateVM.callApi();
+        TextView txtDate = findViewById(R.id.date);
 
-        btnConvert.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                exit = true;
-               Double _base = Double.valueOf(base.getText().toString());
-               String _rate = rate.getText().toString();
-               updateUI( rateVM.convert(_base, _rate) );
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+
+                Date date = new Date();
+
+
+                txtDate.setText("06/"+getMonthForInt(0)+"/2022");
+
+
 
             }
         });
+
+
+
+
+
+        _value = (String) getIntent().getSerializableExtra("value");
+        _rate = (String) getIntent().getSerializableExtra("rate");
+
+
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
+        ImageButton btnSetting = findViewById(R.id.setting);
+        ImageButton btn_convert = findViewById(R.id.btn_convert);
+
+        btn_convert.setOnClickListener(new View.OnClickListener() {
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View view) {
+                rateVM.callApi();
+                rates.clear();
+                rates.addAll(rateVM.getList());
+                rateAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+
+
+
 
         btnSetting.setOnClickListener(new View.OnClickListener(){
 
@@ -74,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ChangeBaseActivity.class);
                 intent.putExtra("codes", codesRate);
                 MainActivity.this.startActivity(intent);
+                finish();
 
             }
         });
@@ -86,19 +125,23 @@ public class MainActivity extends AppCompatActivity {
         for (Rate item: list) {
             codesRate.add(item.getId());
         }
+        if(_rate != null || _value != null){
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,
-                codesRate);
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.menu);
+            if(_rate == null){
+                rateVM.convert(Double.valueOf(_value), "USD");
+            }
+            else if(_value == null){
+                rateVM.convert(1.0, _rate);
+            }
+            else  rateVM.convert(Double.valueOf(_value), _rate);
 
-        textView.setAdapter(adapter);
+        }
 
     }
 
-    public void updateUI(ArrayList<Rate> rates){
-
-            builder.dismiss();
+    public void updateUI(ArrayList<Rate> _rates){
+        builder.dismiss();
+        rates.addAll(_rates);
         if (ifGetData == false){
             RecyclerView recyclerView = findViewById(R.id.rateRecyclerView);
 
@@ -107,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(rateAdapter);
+
+
             ifGetData =true;
         }
         else {
@@ -134,22 +179,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11) {
+            month = months[num];
+        }
+        return month;
+    }
+
 }
 
 
-//        Thread  t= new Thread() {
-//            public void run() {
-//                while(!exit){
-//                    try {
-//                        rateVM.callApi();
-//                        Thread.sleep(5000);
-//
-//
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//            }
-//        };
-//        t.start();
+

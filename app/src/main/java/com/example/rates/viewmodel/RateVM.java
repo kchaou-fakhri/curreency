@@ -2,6 +2,7 @@ package com.example.rates.viewmodel;
 
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -38,14 +39,15 @@ public class RateVM extends ViewModel {
 
         Double original_base, temp = 0.0, temp_convert;
         temp = Double.valueOf(rateRepository.getValueOfMap(base));
-
-
         ArrayList<Rate> _rate = new ArrayList<Rate>();
-        for(Rate rate: getList()){
+
+        _rate.addAll( getList());
+
+        for(Rate rate: _rate){
             original_base = Double.valueOf(rateRepository.getValueOfMap(rate.getId()));
             temp_convert= original_base/temp;
             rate.setValue(String.valueOf(temp_convert*baseValue));
-            _rate.add(rate);
+
         }
         return _rate;
     }

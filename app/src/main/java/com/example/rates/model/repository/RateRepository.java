@@ -39,7 +39,7 @@ public class RateRepository {
     Methods methods = RetrofitClient.getInstance().create(Methods.class);   /******** Create Instance of RetrofitClient *******************/
     Call<Rate> call = methods.getAllData();                                 /******** Get data from getAllData methode of RetrofitClient **/
     AppDatabase db;                                                         /******** Create Instance of Database *************************/
-
+    private boolean ifNoConection = false;
 
     public RateRepository(MainActivity mainActivity){
         rates = new ArrayList<>();
@@ -57,11 +57,11 @@ public class RateRepository {
         call.clone().enqueue(new Callback<Rate>() {
             @Override
             public void onFailure(Call<Rate> call, Throwable t) {
-
+                ifNoConection = true;
                 mainActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // Insert Data
+
                         for (Rate item : rateDAO.getAll()){
                             data.put(item.getId(), item.getValue());
                         }
@@ -99,7 +99,7 @@ public class RateRepository {
 
         if(rates.size() == 0){
             for(Map.Entry<String, String> entry : data.entrySet()) {
-                if(rateName.get(entry.getKey()) !=null){
+                if(rateName.get(entry.getKey()) != null){
                     Rate rate = new Rate();
                     rate.setId(entry.getKey());
                     rate.setName(rateName.get(entry.getKey()));
@@ -108,13 +108,18 @@ public class RateRepository {
                     rate.setPropriety(getPropriety(entry.getKey()));
                     rates.add(rate);
 
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            /******Insert Rate to database *****/
-                            rateDAO.insert(rate);
-                        }
-                    });
+                    if (ifNoConection == false){
+                        AsyncTask.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                /******Insert Rate to database *****/
+                                rateDAO.insert(rate);
+                            }
+                        });
+                    }
+
+
+
                 }
             }
             Collections.sort(rates, new Rate());
@@ -125,12 +130,14 @@ public class RateRepository {
                 return;
             }
             else {
+
                 mainActivity.updateUI(rates);
                 mainActivity.showRates(rates);
             }
         }
         else {
             for (Rate rate: rates){
+
                 rate.setLast_value(rate.getValue());
                 rate.setValue(data.get(rate.getId()));
             }

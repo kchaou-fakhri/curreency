@@ -3,6 +3,7 @@ package com.example.rates.view;
 import android.content.Context;
 import android.graphics.Color;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
         Context context = holder.img_conty.getContext();
         int id = context.getResources().getIdentifier((list.get(position).getId()).toLowerCase(Locale.ROOT).substring(0,2), "drawable", context.getPackageName());
         holder.img_conty.setImageResource(id);
+
 
         holder.rate_code.setText(list.get(position).getId());
         holder.rate_name.setText(list.get(position).getName());
