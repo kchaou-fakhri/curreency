@@ -1,32 +1,26 @@
 package com.example.rates.view;
 
 import android.content.Context;
-import android.graphics.Color;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.rates.R;
 import com.example.rates.model.entity.Rate;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
+public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
 
-    private ArrayList<Rate> list ;
+    private final ArrayList<Rate> list;
 
-    public RateAdapter(ArrayList<Rate> list){
+    public RateAdapter(ArrayList<Rate> list) {
 
-        this.list= list;
+        this.list = list;
 
     }
 
@@ -45,9 +39,9 @@ public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-      //  Log.e("Main","-------------------------"+list.get(position));
+        //  Log.e("Main","-------------------------"+list.get(position));
         Context context = holder.img_conty.getContext();
-        int id = context.getResources().getIdentifier((list.get(position).getId()).toLowerCase(Locale.ROOT).substring(0,2), "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier((list.get(position).getId()).toLowerCase(Locale.ROOT).substring(0, 2), "drawable", context.getPackageName());
         holder.img_conty.setImageResource(id);
 
 
@@ -70,10 +64,13 @@ public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView rate_name, rate_code, rate_value;
-        private ImageView img_conty;
-        public ViewHolder(View view){
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView rate_name;
+        private final TextView rate_code;
+        private final TextView rate_value;
+        private final ImageView img_conty;
+
+        public ViewHolder(View view) {
             super(view);
             rate_name = view.findViewById(R.id.rate_name);
             rate_code = view.findViewById(R.id.rate_code);
@@ -81,7 +78,6 @@ public class RateAdapter extends  RecyclerView.Adapter<RateAdapter.ViewHolder> {
             img_conty = view.findViewById(R.id.img);
         }
     }
-
 
 
 }

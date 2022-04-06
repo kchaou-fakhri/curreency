@@ -33,26 +33,33 @@ import retrofit2.Response;
 public class RateRepository {
 
 
-    private ArrayList<Rate> rates;                                          /******** Create List of currency *****************************/
-    private MainActivity mainActivity;                                      /******** get Context  ****************************************/
-    private HashMap<String, String> data = new HashMap<String, String>();                /******** to Save Currency in temp Hashmap ********************/
-    static HashMap<String, String> rateName = new HashMap<>() ;             /******** to Save name of century in temp Hashmap *************/
-    Methods methods = RetrofitClient.getInstance().create(Methods.class);   /******** Create Instance of RetrofitClient *******************/
-    Call<Rate> call = methods.getAllData();                                 /******** Get data from getAllData methode of RetrofitClient **/
-    AppDatabase db;                                                         /******** Create Instance of Database *************************/
+    private ArrayList<Rate> rates;
+    /******** Create List of currency *****************************/
+    private MainActivity mainActivity;
+    /******** get Context  ****************************************/
+    private HashMap<String, String> data = new HashMap<String, String>();
+    /******** to Save Currency in temp Hashmap ********************/
+    static HashMap<String, String> rateName = new HashMap<>();
+    /******** to Save name of century in temp Hashmap *************/
+    Methods methods = RetrofitClient.getInstance().create(Methods.class);
+    /******** Create Instance of RetrofitClient *******************/
+    Call<Rate> call = methods.getAllData();
+    /******** Get data from getAllData methode of RetrofitClient **/
+    AppDatabase db;
+    /******** Create Instance of Database *************************/
     private boolean ifNoConection = false;
 
-    public RateRepository(MainActivity mainActivity){
+    public RateRepository(MainActivity mainActivity) {
         rates = new ArrayList<>();
         this.mainActivity = mainActivity;
-        db= Room.databaseBuilder(mainActivity,
+        db = Room.databaseBuilder(mainActivity,
                 AppDatabase.class, "ratedb").allowMainThreadQueries().build();
         getAllCurrencies();
 
     }
 
     /******** this function to get data from API  *********************/
-    public void callApi(){
+    public void callApi() {
 
         RateDAO rateDAO = db.rateDAO();
         call.clone().enqueue(new Callback<Rate>() {
@@ -63,17 +70,17 @@ public class RateRepository {
                     @Override
                     public void run() {
 
-                        for (Rate item : rateDAO.getAll()){
+                        for (Rate item : rateDAO.getAll()) {
                             data.put(item.getId(), item.getValue());
                         }
 
-                        if (data.size() == 0){
+                        if (data.size() == 0) {
                             mainActivity.showAlertIfNoConnection();
                             return;
-                        }
-                        else
-                        {
-
+                        } else {
+                            data.remove("BTC");
+                            data.put("ETH", "0.0003");
+                            data.put("BTC", "0.000022");
                             updateData(data);
                         }
                     }
@@ -83,26 +90,29 @@ public class RateRepository {
             @Override
             public void onResponse(Call<Rate> call, Response<Rate> response) {
                 data.putAll(response.body().getData());
-               updateData(data);
+                data.remove("BTC");
+                data.put("ETH", "0.0003");
+                data.put("BTC", "0.000022");
+                updateData(data);
             }
         });
     }
 
     /******** this function to get data from API  *********************/
-    public Rate getValue(String id){
+    public Rate getValue(String id) {
         RateDAO rateDAO = db.rateDAO();
         return rateDAO.getById(id);
     }
 
     /******** this function to update data in Hashmap and insert new data to database  *********************/
-    private void updateData(HashMap<String ,String > data){
+    private void updateData(HashMap<String, String> data) {
 
         RateDAO rateDAO = db.rateDAO();
 
-        if(rates.size() == 0){
-            rates.add(new Rate("ETH","Ethereum","3474.70",1));
-            for(Map.Entry<String, String> entry : data.entrySet()) {
-                if(rateName.get(entry.getKey()) != null){
+        if (rates.size() == 0) {
+
+            for (Map.Entry<String, String> entry : data.entrySet()) {
+                if (rateName.get(entry.getKey()) != null) {
                     Rate rate = new Rate();
                     rate.setId(entry.getKey());
                     rate.setName(rateName.get(entry.getKey()));
@@ -111,7 +121,7 @@ public class RateRepository {
                     rate.setPropriety(getPropriety(entry.getKey()));
                     rates.add(rate);
 
-                    if (ifNoConection == false){
+                    if (ifNoConection == false) {
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
@@ -122,24 +132,21 @@ public class RateRepository {
                     }
 
 
-
                 }
             }
             Collections.sort(rates, new Rate());
 
 
-            if (rates.size() == 0){
+            if (rates.size() == 0) {
                 mainActivity.showAlertIfNoConnection();
                 return;
-            }
-            else {
+            } else {
 
                 mainActivity.updateUI(rates);
                 mainActivity.showRates(rates);
             }
-        }
-        else {
-            for (Rate rate: rates){
+        } else {
+            for (Rate rate : rates) {
 
                 rate.setLast_value(rate.getValue());
                 rate.setValue(data.get(rate.getId()));
@@ -150,21 +157,19 @@ public class RateRepository {
     }
 
     /******** this function to get name of currency *********************/
-    public static Set<Currency> getAllCurrencies()
-    {
+    public static Set<Currency> getAllCurrencies() {
         Set<Currency> toret = new HashSet<Currency>();
         Locale[] locs = Locale.getAvailableLocales();
 
-        for(Locale loc : locs) {
+        for (Locale loc : locs) {
             try {
-                Currency currency = Currency.getInstance( loc );
+                Currency currency = Currency.getInstance(loc);
 
-                if ( currency != null ) {
-                   rateName.put(currency.getCurrencyCode(), currency.getDisplayName());
+                if (currency != null) {
+                    rateName.put(currency.getCurrencyCode(), currency.getDisplayName());
 
                 }
-            } catch(Exception exc)
-            {
+            } catch (Exception exc) {
                 // Locale not found
             }
         }
@@ -177,7 +182,7 @@ public class RateRepository {
     }
 
     /******** this function to get all currency from database ************/
-    public LiveData<ArrayList<Rate>> getAll(){
+    public LiveData<ArrayList<Rate>> getAll() {
         RateDAO rateDAO = db.rateDAO();
         MutableLiveData mutableLiveData = new MutableLiveData();
         mutableLiveData.setValue(rateDAO.getAll());
@@ -190,24 +195,23 @@ public class RateRepository {
     }
 
     /******** this function to return value of currency from HashMap *****/
-    public String getValueOfMap(String id){
+    public String getValueOfMap(String id) {
         return data.get(id);
     }
 
 
-    private int getPropriety(String id){
-        int prop =4;
-        if(id.equals("USD") || id.equals("EUR")  )
-        {
+    private int getPropriety(String id) {
+        int prop = 4;
+        if (id.equals("USD") || id.equals("EUR")) {
             prop = 0;
         }
-        if(id.equals("BTC") ||  id.equals("ETH")){
+        if (id.equals("BTC") || id.equals("ETH")) {
             prop = 1;
         }
-        if(id.equals("TND") || id.equals("CAD") || id.equals("SAR") || id.equals("JPY") || id.equals("AUD") ) {
+        if (id.equals("TND") || id.equals("CAD") || id.equals("SAR") || id.equals("JPY") || id.equals("AUD")) {
             prop = 2;
         }
-        if(id.equals("KRW") || id.equals("CAD") || id.equals("SAR")  || id.equals("EGP") || id.equals("BRL")){
+        if (id.equals("KRW") || id.equals("CAD") || id.equals("SAR") || id.equals("EGP") || id.equals("BRL")) {
             prop = 3;
         }
         return prop;
