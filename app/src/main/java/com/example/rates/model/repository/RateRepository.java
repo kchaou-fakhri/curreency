@@ -202,6 +202,9 @@ public class RateRepository {
 
     private int getPropriety(String id) {
         int prop = 4;
+//        if (id.equals("TND")) {
+//            prop = -1;
+//        }
         if (id.equals("USD") || id.equals("EUR")) {
             prop = 0;
         }

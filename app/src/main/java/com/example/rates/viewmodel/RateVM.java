@@ -13,6 +13,7 @@ import com.example.rates.model.repository.RateRepository;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RateVM extends ViewModel {
 
@@ -37,6 +38,7 @@ public class RateVM extends ViewModel {
     /******** this function to convert currency and return list of currency *********************/
     public ArrayList<Rate>  convert(Double baseValue,String base ) {
 
+
         Double original_base, temp = 0.0, temp_convert;
         temp = Double.valueOf(rateRepository.getValueOfMap(base));
         ArrayList<Rate> _rate = new ArrayList<Rate>();
@@ -44,11 +46,14 @@ public class RateVM extends ViewModel {
         _rate.addAll( getList());
 
         for(Rate rate: _rate){
+            if (rate.getId().equals(base)){
+               rate.setPropriety(-1);
+            }
             original_base = Double.valueOf(rateRepository.getValueOfMap(rate.getId()));
             temp_convert= original_base/temp;
             rate.setValue(String.valueOf(temp_convert*baseValue));
-
-        }
+            }
+        Collections.sort(_rate, new Rate());
         return _rate;
     }
 

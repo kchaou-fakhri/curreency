@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     RateAdapter rateAdapter;
     AlertDialog builder ;
     ArrayList<String> codesRate;
-    ArrayList<Rate> rates;
     String _value;
     String _rate;
     RateVM rateVM;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate_activity);
-        rates = new ArrayList<>();
+
 
         builder = new AlertDialog.Builder(this)
         .setView(R.layout.loading_alert)
@@ -86,13 +85,9 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
-                rateVM.callApi();
-                rates.clear();
-                rates.addAll(rateVM.getList());
-                rateAdapter.notifyDataSetChanged();
+                //rateVM.callApi();
+                updateUI(rateVM.getList());
                 long millis = System.currentTimeMillis();
-
-                // creating a new object of the class Date
                 java.util.Date date = new java.util.Date(millis);
 
                 txtDate.setText(date.toString());
@@ -128,20 +123,26 @@ public class MainActivity extends AppCompatActivity {
         if(_rate != null || _value != null){
 
             if(_rate == null){
-                rateVM.convert(Double.valueOf(_value), "USD");
+
+                ifGetData = false;
+                updateUI(rateVM.convert(Double.valueOf(_value), "USD"));
             }
             else if(_value == null){
-                rateVM.convert(1.0, _rate);
+
+                ifGetData = false;
+                updateUI(rateVM.convert(1.0, _rate));
             }
-            else  rateVM.convert(Double.valueOf(_value), _rate);
+            else
+            ifGetData = false;
+            updateUI(rateVM.convert(Double.valueOf(_value), _rate));
 
         }
 
     }
 
-    public void updateUI(ArrayList<Rate> _rates){
+    public void updateUI(ArrayList<Rate> rates){
         builder.dismiss();
-        rates.addAll(_rates);
+
         if (ifGetData == false){
             RecyclerView recyclerView = findViewById(R.id.rateRecyclerView);
 
@@ -150,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(rateAdapter);
-
 
             ifGetData =true;
         }
