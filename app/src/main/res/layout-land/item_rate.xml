@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+
+
+
+
+    >
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            android:layout_margin="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="50dp"
+            android:minWidth="49dp"
+            android:maxHeight="50dp"
+            android:minHeight="49dp"
+            android:src="@drawable/re"
+
+
+            />
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="wrap_content" android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/card_img">
+            <!--text view for displaying our note text-->
+            <TextView
+                android:id="@+id/rate_code"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="15dp"
+                android:text="TND"
+                android:textColor="#454548"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/rate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+
+                android:layout_marginTop="3dp"
+                android:textSize="10sp"
+                android:layout_marginBottom="0dp"
+                android:paddingLeft="15dp"
+                android:text="Tunisia"
+                android:textColor="#8b8b8b"
+
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!--text view for displaying our last updated text-->
+        <TextView
+
+            android:id="@+id/rate_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bookmark"
+            android:gravity="right"
+            android:text="3.9558741"
+            android:textColor="#4a4a4a"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/bookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_bookmark"
+            app:tint="#435bb9" />
+        <!--imageview for displaying delete icon-->
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

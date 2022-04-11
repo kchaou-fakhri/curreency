@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/shape"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="80dp"
 
         android:orientation="vertical"
         android:background="#435bb9"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="05dp"
             android:layout_marginRight="10dp"
             android:background="#00FFFFFF"
             android:src="@drawable/ic_settings"
@@ -37,14 +37,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="10dp"
             android:text="20 FEBRUARY 2022 - 11:26"
             android:textColor="@color/white"
             android:textSize="17dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
 
             android:background="@drawable/name_of_item">
@@ -58,7 +58,7 @@
                 android:layout_marginLeft="20dp"
 
                 android:gravity="center"
-                android:text="@string/select_currency"
+                android:text="SELECT CURRENCY"
                 android:textColor="#363739"
 
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="3dp"
                 android:gravity="center"
-                android:text="@string/crypto"
+                android:text="CYPTO"
                 android:textColor="#363739"
 
                 />
@@ -83,7 +83,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/cypto"
                 android:gravity="center"
-                android:text="@string/currency"
+                android:text="CURRENCY"
                 android:textColor="#363739"
 
                 />
@@ -95,12 +95,14 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/currency"
                 android:gravity="center"
-                android:text="@string/all"
+                android:text="ALL"
                 android:textColor="#435bb9"
 
                 />
         </RelativeLayout>
     </RelativeLayout>
+
+
 
 
 
@@ -116,22 +118,26 @@
 
         app:layout_constraintTop_toBottomOf="@+id/shape"
         app:layout_constraintVertical_bias="0.005"
-      >
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rateRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-       />
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rateRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            />
 
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
 
 
 
     <RelativeLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -163,8 +169,8 @@
 
         <ImageButton
             android:id="@+id/btn_convert"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
 
             android:layout_centerInParent="true"
             android:background="@drawable/circle"

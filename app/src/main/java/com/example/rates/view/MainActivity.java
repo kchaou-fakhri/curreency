@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.LogPrinter;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.example.rates.R;
@@ -35,12 +37,15 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     Boolean ifGetData = false, exit = false;
+    TextView txtDate ;
     RateAdapter rateAdapter;
     AlertDialog builder ;
     ArrayList<String> codesRate;
     String _value;
     String _rate;
     RateVM rateVM;
+    private SwipeRefreshLayout swipeRefrech;
+
 
 
     @Override
@@ -53,6 +58,33 @@ public class MainActivity extends AppCompatActivity {
         .setView(R.layout.loading_alert)
         .setCancelable(false)
         .show();
+       txtDate = findViewById(R.id.date);
+        swipeRefrech = findViewById(R.id.swiperefresh);
+
+        swipeRefrech.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+
+                handler.postDelayed( new Runnable() {
+                    @Override
+                    public void run() {
+
+                        rateVM = new RateVM(MainActivity.this);
+                        rateVM.callApi();
+                        swipeRefrech.setRefreshing(false);
+                        long millis = System.currentTimeMillis();
+                        java.util.Date date = new java.util.Date(millis);
+
+                       txtDate.setText(date.toString().substring(0,19)+" "+date.toString().substring(23));
+
+
+                    }
+                }, 1000);
+
+              //  swipeRefrech.setRefreshing(false);
+            }
+        });
 
         rateVM = new RateVM(this);
         rateVM.callApi();
@@ -64,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
         // creating a new object of the class Date
         java.util.Date date = new java.util.Date(millis);
 
-        txtDate.setText(date.toString());
+        txtDate.setText(date.toString().substring(0,19)+" "+date.toString().substring(23));
+
 
 
 

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rates</string>
+    <string name="all">TOUT</string>
+    <string name="currency">DEVISE</string>
+    <string name="crypto">CRYPTO</string>
+    <string name="select_currency">CHOISI DEVISE</string>
+    <string name="setting">Paramèters</string>
+    <string name="save">Enregistrer</string>
+</resources>
