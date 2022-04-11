@@ -81,6 +81,7 @@ public class RateRepository {
                             data.remove("BTC");
                             data.put("ETH", "0.0003");
                             data.put("BTC", "0.000022");
+                            mainActivity.setTxtDate("Mode Offline");
                             updateData(data);
                         }
                     }
