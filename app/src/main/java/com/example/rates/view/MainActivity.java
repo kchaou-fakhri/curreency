@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 Double _base = Double.valueOf(base.getText().toString());
                 String _rate = rate.getText().toString();
 
-                updateUI(rateVM.convert(_base, _rate));
+                ifGetData = false;
+               updateUI(rateVM.convert(_base, _rate));
+
 
 
             }

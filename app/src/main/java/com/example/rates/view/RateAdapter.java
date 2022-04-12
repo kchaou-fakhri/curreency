@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
 
-    private final ArrayList<Rate> list;
+    private ArrayList<Rate> list;
 
     public RateAdapter(ArrayList<Rate> list) {
 
@@ -77,6 +77,18 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
             rate_value = view.findViewById(R.id.rate_value);
             img_conty = view.findViewById(R.id.img);
         }
+    }
+
+
+    // Swap itemA with itemB
+    public void swapItems(int itemAIndex, int itemBIndex) {
+        //make sure to check if dataset is null and if itemA and itemB are valid indexes.
+        Rate itemA = list.get(itemAIndex);
+        Rate itemB = list.get(itemBIndex);
+        list.set(itemAIndex, itemB);
+        list.set(itemBIndex, itemA);
+
+        notifyDataSetChanged(); //This will trigger onBindViewHolder method from the adapter.
     }
 
 

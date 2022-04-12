@@ -1,4 +1,4 @@
-package com.example.rates.model.data;
+package com.example.rates.model.data.remote;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

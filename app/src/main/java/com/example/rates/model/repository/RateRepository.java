@@ -1,24 +1,21 @@
 package com.example.rates.model.repository;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
-import com.example.rates.R;
-import com.example.rates.model.data.AppDatabase;
-import com.example.rates.model.data.RateDAO;
+import com.example.rates.model.data.local.AppDatabase;
+import com.example.rates.model.data.local.RateDAO;
 import com.example.rates.view.MainActivity;
 
-import com.example.rates.model.data.Methods;
-import com.example.rates.model.data.RetrofitClient;
+import com.example.rates.model.data.remote.Methods;
+import com.example.rates.model.data.remote.RetrofitClient;
 import com.example.rates.model.entity.Rate;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;

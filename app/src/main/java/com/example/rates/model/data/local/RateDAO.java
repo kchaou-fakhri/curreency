@@ -1,4 +1,4 @@
-package com.example.rates.model.data;
+package com.example.rates.model.data.local;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

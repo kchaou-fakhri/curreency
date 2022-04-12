@@ -1,4 +1,4 @@
-package com.example.rates.model.data;
+package com.example.rates.model.data.remote;
 
 
 import com.example.rates.model.entity.Rate;
