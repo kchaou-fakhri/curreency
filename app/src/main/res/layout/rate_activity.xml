@@ -13,10 +13,10 @@
     <RelativeLayout
         android:id="@+id/shape"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
 
         android:orientation="vertical"
-        android:background="#435bb9"
+        android:background="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:text="20 FEBRUARY 2022 - 11:26"
             android:textColor="@color/white"
             android:textSize="17dp" />

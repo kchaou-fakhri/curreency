@@ -16,7 +16,7 @@
         android:layout_height="80dp"
 
         android:orientation="vertical"
-        android:background="#435bb9"
+        android:background="@color/purple_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -179,7 +179,6 @@
 
 
             android:layout_marginLeft="5dp"
-            app:endIconMode="clear_text"
             app:helperText=""
             app:helperTextTextColor="#dd0000"
             app:layout_constraintBottom_toBottomOf="@+id/textField"

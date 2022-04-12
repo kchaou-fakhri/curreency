@@ -77,14 +77,21 @@ public class MainActivity extends AppCompatActivity {
         btnConvert.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                if(base.getText().toString().length() != 0 || rate.getText().toString().length() != 0){
 
-                Double _base = Double.valueOf(base.getText().toString());
-                String _rate = rate.getText().toString();
 
+                Double _base = 1.0;
+                String _rate = "USD";
+                if(base.getText().toString().length() != 0){
+                    _base = Double.valueOf(base.getText().toString());
+                }
+                if(rate.getText().toString().length() != 0){
+                    _rate = rate.getText().toString();
+                }
                 ifGetData = false;
                updateUI(rateVM.convert(_base, _rate));
 
-
+                }
 
             }
         });
@@ -111,13 +118,13 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
 
                         rateVM = new RateVM(MainActivity.this);
-                        rateVM.callApi();
+
                         swipeRefresh.setRefreshing(false);
                         long millis = System.currentTimeMillis();
                         java.util.Date date = new java.util.Date(millis);
 
                         txtDate.setText(date.toString().substring(0, 4) + getMonth(date.toString().substring(4, 7)) + " " + date.toString().substring(8, 19) + " " + Calendar.getInstance().get(Calendar.YEAR));
-
+                        rateVM.callApi();
 
                     }
                 }, 1000);
@@ -170,9 +177,10 @@ public class MainActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this,
                 androidx.appcompat.R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         builder.setIcon(R.drawable.ic_no_wifi);
-        builder.setTitle("Sorry !");
+        builder.setTitle("Warning ");
         builder.setMessage("Check your internet connection and try again.");
         builder.setCancelable(false);
+
         builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
