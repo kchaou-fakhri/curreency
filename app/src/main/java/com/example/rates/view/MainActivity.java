@@ -1,6 +1,5 @@
 package com.example.rates.view;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +24,8 @@ import com.example.rates.model.entity.Rate;
 import com.example.rates.viewmodel.RateVM;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog builder;
     ArrayList<String> codesRate;
     RateVM rateVM;
-    private SwipeRefreshLayout swipeRefrech;
+    private SwipeRefreshLayout swipeRefresh;
 
 
     @Override
@@ -47,59 +46,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate_activity);
 
+        rateVM = new RateVM(this);
 
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
-
         EditText base = findViewById(R.id.base);
         EditText rate = findViewById(R.id.menu);
-
+        ImageButton btnSetting = findViewById(R.id.setting);
         Button btnConvert = findViewById(R.id.btn_convert);
+        txtDate = findViewById(R.id.date);
+        swipeRefresh = findViewById(R.id.swiperefresh);
+        TextView txtDate = findViewById(R.id.date);
+        long millis = System.currentTimeMillis();
 
+        /********* Show Progress Bar when callApi   ****************/
         builder = new AlertDialog.Builder(this)
                 .setView(R.layout.loading_alert)
                 .setCancelable(false)
                 .show();
-        txtDate = findViewById(R.id.date);
-        swipeRefrech = findViewById(R.id.swiperefresh);
-
-        swipeRefrech.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Handler handler = new Handler();
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        rateVM = new RateVM(MainActivity.this);
-                        rateVM.callApi();
-                        swipeRefrech.setRefreshing(false);
-                        long millis = System.currentTimeMillis();
-                        java.util.Date date = new java.util.Date(millis);
-
-                        txtDate.setText(date.toString().substring(0, 19) + " " + date.toString().substring(23));
 
 
-                    }
-                }, 1000);
-
-                //  swipeRefrech.setRefreshing(false);
-            }
-        });
-
-        rateVM = new RateVM(this);
+        /********* get Data from API *****************************/
         rateVM.callApi();
-        TextView txtDate = findViewById(R.id.date);
 
 
-        long millis = System.currentTimeMillis();
-
-        // creating a new object of the class Date
+        /********* get current Date *******************************/
         java.util.Date date = new java.util.Date(millis);
+        txtDate.setText(date.toString().substring(0, 4) + getMonth(date.toString().substring(4, 7)) + " " + date.toString().substring(8, 19) + " " + Calendar.getInstance().get(Calendar.YEAR));
 
-        txtDate.setText(date.toString().substring(0, 19) + " " + date.toString().substring(23));
-
-
+        /********* On click of button convert *******************************/
         btnConvert.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -113,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        ImageButton btnSetting = findViewById(R.id.setting);
-
         btnSetting.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -127,8 +98,34 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        /********* On refresh List view *******************************/
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        rateVM = new RateVM(MainActivity.this);
+                        rateVM.callApi();
+                        swipeRefresh.setRefreshing(false);
+                        long millis = System.currentTimeMillis();
+                        java.util.Date date = new java.util.Date(millis);
+
+                        txtDate.setText(date.toString().substring(0, 4) + getMonth(date.toString().substring(4, 7)) + " " + date.toString().substring(8, 19) + " " + Calendar.getInstance().get(Calendar.YEAR));
+
+
+                    }
+                }, 1000);
+
+
+            }
+        });
     }
 
+    /********* Show Code of the rate in AutoCompleteTextVIew *******************************/
     public void showRates(ArrayList<Rate> list) {
 
         ArrayList<String> _list = new ArrayList<String>();
@@ -146,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /********* Send data to RateAdapter to show list of rates *******************************/
     public void updateUI(ArrayList<Rate> rates) {
         builder.dismiss();
 
@@ -165,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /********* Display Alert if no Connection and no database *******************************/
     public void showAlertIfNoConnection() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this,
                 androidx.appcompat.R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
@@ -184,14 +183,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    String getMonthForInt(int num) {
-        String month = "wrong";
-        DateFormatSymbols dfs = new DateFormatSymbols();
-        String[] months = dfs.getMonths();
-        if (num >= 0 && num <= 11) {
-            month = months[num];
+    /********* return the complete name of month *******************************/
+    public static String getMonth(String month) {
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String _month = "";
+        switch (month) {
+            case "Jan":
+                _month = monthNames[0];
+                break;
+            case "Feb":
+                _month = monthNames[1];
+                break;
+            case "Mar":
+                _month = monthNames[2];
+                break;
+            case "Apr":
+                _month = monthNames[3];
+                break;
+            case "May":
+                _month = monthNames[4];
+                break;
+            case "Jun":
+                _month = monthNames[5];
+                break;
+            case "Lul":
+                _month = monthNames[6];
+                break;
+            case "Aug":
+                _month = monthNames[7];
+                break;
+            case "Sep":
+                _month = monthNames[8];
+                break;
+            case "Oct":
+                _month = monthNames[9];
+                break;
+            case "Nov":
+                _month = monthNames[10];
+                break;
+            case "Dec":
+                _month = monthNames[11];
+                break;
         }
-        return month;
+        return _month;
     }
 
     public TextView getTxtDate() {
