@@ -200,7 +200,7 @@ public class RateRepository {
         return data.get(id);
     }
 
-
+    /******** this function to return propriety for sort the arraylist *****/
     private int getPropriety(String id) {
         int prop = 4;
 //        if (id.equals("TND")) {

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
         EditText base = findViewById(R.id.base);
         EditText rate = findViewById(R.id.menu);
-        ImageButton btnSetting = findViewById(R.id.setting);
+     //   ImageButton btnSetting = findViewById(R.id.setting);
         Button btnConvert = findViewById(R.id.btn_convert);
         txtDate = findViewById(R.id.date);
         swipeRefresh = findViewById(R.id.swiperefresh);
@@ -87,17 +87,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnSetting.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ChangeBaseActivity.class);
-                intent.putExtra("codes", codesRate);
-                MainActivity.this.startActivity(intent);
-
-
-            }
-        });
+//        btnSetting.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, ChangeBaseActivity.class);
+//                intent.putExtra("codes", codesRate);
+//                MainActivity.this.startActivity(intent);
+//
+//
+//            }
+//        });
         /********* On refresh List view *******************************/
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
