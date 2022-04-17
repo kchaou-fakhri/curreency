@@ -25,19 +25,20 @@ import com.example.rates.viewmodel.RateVM;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    Boolean ifGetData = false, exit = false;
-
-
-    TextView txtDate;
-    RateAdapter rateAdapter;
-    AlertDialog builder;
-    ArrayList<String> codesRate;
-    RateVM rateVM;
+    private Boolean ifGetData = false, exit = false, ifInAllCurrency = false;
+    private TextView txtDate, txtAllCurrency, txtCurrency, txtCrypto;
+    private EditText base, rate;
+    private AutoCompleteTextView autoCompleteTextView;
+    private Button btnConvert;
+    private RateAdapter rateAdapter;
+    private AlertDialog builder;
+    private RateVM rateVM;
     private SwipeRefreshLayout swipeRefresh;
 
 
@@ -48,14 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         rateVM = new RateVM(this);
 
-        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.menu);
-        EditText base = findViewById(R.id.base);
-        EditText rate = findViewById(R.id.menu);
-     //   ImageButton btnSetting = findViewById(R.id.setting);
-        Button btnConvert = findViewById(R.id.btn_convert);
-        txtDate = findViewById(R.id.date);
-        swipeRefresh = findViewById(R.id.swiperefresh);
-        TextView txtDate = findViewById(R.id.date);
+        autoCompleteTextView = findViewById(R.id.menu);
+        base                 = findViewById(R.id.base);
+        rate                 = findViewById(R.id.menu);
+        btnConvert           = findViewById(R.id.btn_convert);
+        txtDate              = findViewById(R.id.date);
+        txtAllCurrency       = findViewById(R.id.all_currency);
+        txtCurrency          = findViewById(R.id.currency);
+        txtCrypto            = findViewById(R.id.cypto);
+        swipeRefresh         = findViewById(R.id.swiperefresh);
+        txtDate              = findViewById(R.id.date);
+
         long millis = System.currentTimeMillis();
 
         /********* Show Progress Bar when callApi   ****************/
@@ -88,8 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 if(rate.getText().toString().length() != 0){
                     _rate = rate.getText().toString();
                 }
-                ifGetData = false;
-               updateUI(rateVM.convert(_base, _rate));
+                if( ifInAllCurrency == true){
+                    ifGetData = false;
+
+                }
+                 updateUI(rateVM.convert(_base, _rate));
 
                 }
 
@@ -132,6 +139,66 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        /********* Filter list only currency **************************/
+
+        txtCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifGetData = false;
+                updateUI(rateVM.filter("rate"));
+                txtCurrency.setTextSize(16);
+                txtCrypto.setTextSize(13);
+                txtAllCurrency.setTextSize(13);
+
+                txtCurrency.setTextColor(getResources().getColor(R.color.purple_200));
+                txtAllCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtCrypto.setTextColor(getResources().getColor(R.color.black_2));
+
+
+            }
+        });
+
+        /********* Display all list **************************/
+
+        txtAllCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifGetData = false;
+                ifInAllCurrency = true;
+                updateUI(rateVM.getList());
+                txtCurrency.setTextSize(13);
+                txtCrypto.setTextSize(13);
+                txtAllCurrency.setTextSize(16);
+
+                txtCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtAllCurrency.setTextColor(getResources().getColor(R.color.purple_200));
+                txtCrypto.setTextColor(getResources().getColor(R.color.black_2));
+
+            }
+        });
+
+        /********* Filter list only crypto **************************/
+
+        txtCrypto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifGetData = false;
+
+                txtCurrency.setTextSize(13);
+                txtCrypto.setTextSize(16);
+                txtAllCurrency.setTextSize(13);
+
+
+                updateUI(rateVM.filter("crypto"));
+                txtCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtAllCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtCrypto.setTextColor(getResources().getColor(R.color.purple_200));
+            }
+        });
+
+
+
     }
 
     /********* Show Code of the rate in AutoCompleteTextVIew *******************************/

@@ -30,6 +30,11 @@ public class Rate implements Comparator<Rate> {
     private String name;
     @ColumnInfo(name = "value")
     private String value;
+
+
+
+    @ColumnInfo(defaultValue ="rate")
+    private String type = "rate";
     @Ignore
     private String last_value;
 
@@ -65,7 +70,13 @@ public class Rate implements Comparator<Rate> {
     public void setLast_value(String last_value) {
         this.last_value = last_value;
     }
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getId() {
         return id;
@@ -91,7 +102,7 @@ public class Rate implements Comparator<Rate> {
 
     @Override
     public String toString(){
-        return name +"=========>" +id + " : "+value + " Property : "+propriety ;
+        return "\n"+name +"=========>" +id + " : "+value + " Property : "+propriety  + " Type : "+ type;
     }
 
 

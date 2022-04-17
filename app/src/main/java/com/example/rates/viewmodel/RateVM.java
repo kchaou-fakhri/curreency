@@ -43,19 +43,34 @@ public class RateVM extends ViewModel {
         temp = Double.valueOf(rateRepository.getValueOfMap(base));
         ArrayList<Rate> _rate = new ArrayList<Rate>();
 
-        _rate.addAll( getList());
 
-        for(Rate rate: _rate){
-            if (rate.getId().equals(base)){
-               rate.setPropriety(-1);
-            }
+
+        for(Rate rate: getList()){
+
             original_base = Double.valueOf(rateRepository.getValueOfMap(rate.getId()));
             temp_convert= original_base/temp;
             rate.setValue(String.valueOf(temp_convert*baseValue));
+            rate.setPropriety(rateRepository.getPropriety(rate.getId()));
+            if (rate.getId().equals(base)){
+                rate.setPropriety(-1);
             }
+            _rate.add(rate);
+            }
+
         Collections.sort(_rate, new Rate());
+        Log.println(Log.ASSERT, "", _rate.toString());
         return _rate;
     }
 
+    public ArrayList<Rate> filter(String type){
+        ArrayList<Rate> _rate = new ArrayList<Rate>();
 
+        for (Rate rate : getList()){
+            if (rate.getType().equals(type)){
+                _rate.add(rate);
+            }
+        }
+
+        return _rate;
+    }
 }

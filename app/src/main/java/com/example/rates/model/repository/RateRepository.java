@@ -116,6 +116,9 @@ public class RateRepository {
                     rate.setName(rateName.get(entry.getKey()));
                     rate.setValue(entry.getValue());
                     rate.setLast_value(entry.getValue());
+                    if(rate.getId().equals("BTC") || rate.getId().equals("ETH")){
+                        rate.setType("crypto");
+                    }
                     rate.setPropriety(getPropriety(entry.getKey()));
                     rates.add(rate);
 
@@ -198,7 +201,7 @@ public class RateRepository {
     }
 
     /******** this function to return propriety for sort the arraylist *****/
-    private int getPropriety(String id) {
+    public int getPropriety(String id) {
         int prop = 4;
 //        if (id.equals("TND")) {
 //            prop = -1;
