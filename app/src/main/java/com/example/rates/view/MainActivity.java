@@ -31,7 +31,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Boolean ifGetData = false, exit = false, ifInAllCurrency = false;
+    private Boolean ifGetData = false, exit = false, ifInAllCurrency = true;
     private TextView txtDate, txtAllCurrency, txtCurrency, txtCrypto;
     private EditText base, rate;
     private AutoCompleteTextView autoCompleteTextView;
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if( ifInAllCurrency == true){
                     ifGetData = false;
-
                 }
                  updateUI(rateVM.convert(_base, _rate));
 
@@ -129,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
                         swipeRefresh.setRefreshing(false);
                         long millis = System.currentTimeMillis();
                         java.util.Date date = new java.util.Date(millis);
-
+                        ifGetData = false;
                         txtDate.setText(date.toString().substring(0, 4) + getMonth(date.toString().substring(4, 7)) + " " + date.toString().substring(8, 19) + " " + Calendar.getInstance().get(Calendar.YEAR));
                         rateVM.callApi();
 
                     }
-                }, 1000);
+                }, 1500);
 
 
             }
@@ -146,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ifGetData = false;
+                ifInAllCurrency = false;
                 updateUI(rateVM.filter("rate"));
                 txtCurrency.setTextSize(16);
                 txtCrypto.setTextSize(13);
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ifGetData = false;
-
+                ifInAllCurrency = false;
                 txtCurrency.setTextSize(13);
                 txtCrypto.setTextSize(16);
                 txtAllCurrency.setTextSize(13);
