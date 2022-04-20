@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 
 public interface Methods {
 
-    @GET("latest?apikey=AcvroHC2Zcc2vbJYwa6g9ODUVI93zGwxyzdmUqSc")
+    @GET("latest?apikey=zNigeB84JCVYzglqPR2pMzj4CxBi6Sb87OZWPsBf")
     Call<Rate> getAllData();
 }
