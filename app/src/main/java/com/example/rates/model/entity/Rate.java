@@ -30,6 +30,18 @@ public class Rate implements Comparator<Rate> {
     private String name;
     @ColumnInfo(name = "value")
     private String value;
+    @ColumnInfo(name = "favourite")
+    private Boolean favourite;
+
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
+    }
+
 
 
 
@@ -70,6 +82,36 @@ public class Rate implements Comparator<Rate> {
     public void setLast_value(String last_value) {
         this.last_value = last_value;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public String getType() {
         return type;
     }

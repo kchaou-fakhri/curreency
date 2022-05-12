@@ -1,15 +1,18 @@
 package com.example.rates.view;
 
+import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -25,7 +28,6 @@ import com.example.rates.viewmodel.RateVM;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
 
@@ -45,20 +47,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        hideSystemUI();
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+//        }
         setContentView(R.layout.rate_activity);
 
         rateVM = new RateVM(this);
 
         autoCompleteTextView = findViewById(R.id.menu);
-        base                 = findViewById(R.id.base);
-        rate                 = findViewById(R.id.menu);
-        btnConvert           = findViewById(R.id.btn_convert);
-        txtDate              = findViewById(R.id.date);
-        txtAllCurrency       = findViewById(R.id.all_currency);
-        txtCurrency          = findViewById(R.id.currency);
-        txtCrypto            = findViewById(R.id.cypto);
-        swipeRefresh         = findViewById(R.id.swiperefresh);
-        txtDate              = findViewById(R.id.date);
+        base = findViewById(R.id.base);
+        rate = findViewById(R.id.menu);
+        btnConvert = findViewById(R.id.btn_convert);
+        txtDate = findViewById(R.id.date);
+        txtAllCurrency = findViewById(R.id.all_currency);
+        txtCurrency = findViewById(R.id.currency);
+        txtCrypto = findViewById(R.id.cypto);
+        swipeRefresh = findViewById(R.id.swiperefresh);
+        txtDate = findViewById(R.id.date);
 
         long millis = System.currentTimeMillis();
 
@@ -81,23 +87,26 @@ public class MainActivity extends AppCompatActivity {
         btnConvert.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                if(base.getText().toString().length() != 0 || rate.getText().toString().length() != 0){
+                if (base.getText().toString().length() != 0 || rate.getText().toString().length() != 0) {
 
 
-                Double _base = 1.0;
-                String _rate = "USD";
-                if(base.getText().toString().length() != 0){
-                    _base = Double.valueOf(base.getText().toString());
-                }
-                if(rate.getText().toString().length() != 0){
-                    _rate = rate.getText().toString();
-                }
-                if( ifInAllCurrency == true){
-                    ifGetData = false;
-                }
-                 updateUI(rateVM.convert(_base, _rate));
+                    Double _base = 1.0;
+                    String _rate = "USD";
+                    if (base.getText().toString().length() != 0) {
+                        _base = Double.valueOf(base.getText().toString());
+                    }
+                    if (rate.getText().toString().length() != 0) {
+                        _rate = rate.getText().toString();
+                    }
+                    if (ifInAllCurrency == true) {
+                        ifGetData = false;
+                    }
+                    updateUI(rateVM.convert(_base, _rate));
 
                 }
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
 
             }
         });
@@ -198,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     /********* Show Code of the rate in AutoCompleteTextVIew *******************************/
@@ -221,6 +229,10 @@ public class MainActivity extends AppCompatActivity {
 
     /********* Send data to RateAdapter to show list of rates *******************************/
     public void updateUI(ArrayList<Rate> rates) {
+        Log.println(Log.ASSERT, "", String.valueOf(rates.size()));
+        if(rates.size() > 0){
+            Log.println(Log.ASSERT, "", "pokpop");
+
         builder.dismiss();
 
         if (ifGetData == false) {
@@ -235,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             ifGetData = true;
         } else {
             rateAdapter.notifyDataSetChanged();
+        }
         }
 
     }
@@ -313,7 +326,16 @@ public class MainActivity extends AppCompatActivity {
         this.txtDate.setText(txtDate);
     }
 
+    private void hideSystemUI() {
 
+//        getWindow().getDecorView().setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_FULLSCREEN
+//                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
 }
 
 

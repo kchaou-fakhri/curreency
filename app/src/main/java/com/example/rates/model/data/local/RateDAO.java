@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.rates.model.entity.Rate;
 
@@ -22,4 +23,6 @@ public interface RateDAO {
     @Query("SELECT * FROM rate where id = :id")
     Rate getById(String id);
 
+    @Update
+    void update(Rate rate);
 }

@@ -35,6 +35,8 @@ public class RateRepository {
     private MainActivity mainActivity;
     /******** get Context  ****************************************/
     private HashMap<String, String> data = new HashMap<String, String>();
+    /******** get Context  ****************************************/
+    private HashMap<String, Boolean> favorites = new HashMap<String, Boolean>();
     /******** to Save Currency in temp Hashmap ********************/
     static HashMap<String, String> rateName = new HashMap<>();
     /******** to Save name of century in temp Hashmap *************/
@@ -69,6 +71,7 @@ public class RateRepository {
 
                         for (Rate item : rateDAO.getAll()) {
                             data.put(item.getId(), item.getValue());
+                            favorites.put(item.getId(), item.getFavourite());
                         }
 
                         if (data.size() == 0) {
@@ -116,9 +119,11 @@ public class RateRepository {
                     rate.setName(rateName.get(entry.getKey()));
                     rate.setValue(entry.getValue());
                     rate.setLast_value(entry.getValue());
+                    rate.setFavourite(false);
                     if(rate.getId().equals("BTC") || rate.getId().equals("ETH")){
                         rate.setType("crypto");
                     }
+
                     rate.setPropriety(getPropriety(entry.getKey()));
                     rates.add(rate);
 
@@ -221,4 +226,8 @@ public class RateRepository {
         return prop;
     }
 
+    public void updateRate(Rate rate) {
+        RateDAO rateDAO = db.rateDAO();
+        rateDAO.update(rate);
+    }
 }

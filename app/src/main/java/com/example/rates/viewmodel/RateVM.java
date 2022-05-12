@@ -30,6 +30,11 @@ public class RateVM extends ViewModel {
         rateRepository.callApi();
     }
 
+    /******** this function to Call methode "callApi" of Repository *********************/
+    public void updateRate(Rate rate){
+        rateRepository.updateRate(rate);
+    }
+
     /******** this function to Call methode "getList" of Repository to return list of currency *********************/
     public ArrayList<Rate> getList(){
         return rateRepository.getList();

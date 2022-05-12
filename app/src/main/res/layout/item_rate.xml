@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/bookmark"
+            android:layout_toLeftOf="@+id/fav_btn"
             android:gravity="right"
             android:text="3.9558741"
             android:textColor="#4a4a4a"
@@ -90,7 +90,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/bookmark"
+            android:id="@+id/fav_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
