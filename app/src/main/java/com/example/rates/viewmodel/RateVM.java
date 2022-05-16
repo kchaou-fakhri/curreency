@@ -4,6 +4,8 @@ package com.example.rates.viewmodel;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.rates.view.MainActivity;
@@ -63,7 +65,7 @@ public class RateVM extends ViewModel {
             }
 
         Collections.sort(_rate, new Rate());
-        Log.println(Log.ASSERT, "", _rate.toString());
+
         return _rate;
     }
 
@@ -77,5 +79,19 @@ public class RateVM extends ViewModel {
         }
 
         return _rate;
+    }
+
+    public LiveData<ArrayList<Rate>> getFavorites(){
+        ArrayList<Rate> _rate = new ArrayList<Rate>();
+
+        for (Rate rate : getList()){
+            if (rate.getFavourite().equals(true)){
+                _rate.add(rate);
+            }
+        }
+        MutableLiveData mutableLiveData = new MutableLiveData();
+        mutableLiveData.setValue(_rate);
+        return mutableLiveData;
+      // return rateRepository.getFavorites();
     }
 }

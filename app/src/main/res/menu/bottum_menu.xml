@@ -1,32 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
 
     <item
-        android:id="@+id/menu"
+        android:id="@+id/lang"
         android:enabled="true"
-        android:icon="@drawable/ic_refresh"
-        android:title=""/>
+        android:icon="@drawable/ic_language"
+        android:title="@string/language"/>
     <item
-        android:id="@+id/profile"
+        android:id="@+id/about"
         android:enabled="true"
-        android:icon="@drawable/ic_bookmark"
-        android:title=""/>
+        android:icon="@drawable/ic_error"
+        
+        android:title="@string/about"/>
 
-    <item
-        android:id="@+id/create_post"
-        android:enabled="true"
-        android:icon="@drawable/ic_refresh"
-        android:title=""/>
 
-    <item
-        android:id="@+id/home"
-        android:enabled="true"
-        app:icon="@drawable/ic_news"
-        android:title=""/>
-
-    <item
-        android:id="@+id/person"
-        android:enabled="true"
-        android:icon="@drawable/ic_person"
-        android:title=""/>
+    </group>
 </menu>

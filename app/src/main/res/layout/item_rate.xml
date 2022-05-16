@@ -96,8 +96,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/white"
-            android:src="@drawable/ic_bookmark"
-            app:tint="#435bb9" />
+
+            app:tint="@color/purple_200" />
         <!--imageview for displaying delete icon-->
 
     </RelativeLayout>

@@ -57,8 +57,11 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
 
         if(list.get(position).getFavourite() == true){
 
-
             holder.img_fav.setImageResource(R.drawable.ic_bookmark_ucc);
+        }
+        else {
+            holder.img_fav.setImageResource(R.drawable.ic_bookmark);
+
         }
 
 //        if(Double.valueOf(list.get(position).getValue()) >
@@ -99,14 +102,16 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.ViewHolder> {
                     if(rate.getFavourite().equals(false)){
                         rate.setFavourite(true);
                         rateVM.updateRate(rate);
+                        img_fav.setImageResource(R.drawable.ic_bookmark_ucc);
                     }
                     else {
                         rate.setFavourite(false);
                         rateVM.updateRate(rate);
+                        img_fav.setImageResource(R.drawable.ic_bookmark);
                     }
 
 
-                    img_fav.setImageResource(R.drawable.ic_bookmark_ucc);
+
 
 
 

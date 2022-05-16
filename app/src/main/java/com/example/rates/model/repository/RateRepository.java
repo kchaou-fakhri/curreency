@@ -1,6 +1,7 @@
 package com.example.rates.model.repository;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -19,6 +20,7 @@ import java.util.Collections;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -91,6 +93,20 @@ public class RateRepository {
             @Override
             public void onResponse(Call<Rate> call, Response<Rate> response) {
                 data.putAll(response.body().getData());
+
+                mainActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        for (Rate item : rateDAO.getAll()) {
+                            data.put(item.getId(), item.getValue());
+                            favorites.put(item.getId(), item.getFavourite());
+                        }
+
+
+                    }
+                });
+
                 data.remove("BTC");
                 data.put("ETH", "0.0003");
                 data.put("BTC", "0.000022");
@@ -119,12 +135,27 @@ public class RateRepository {
                     rate.setName(rateName.get(entry.getKey()));
                     rate.setValue(entry.getValue());
                     rate.setLast_value(entry.getValue());
-                    rate.setFavourite(false);
+                    rate.setPropriety(getPropriety(entry.getKey()));
+
                     if(rate.getId().equals("BTC") || rate.getId().equals("ETH")){
                         rate.setType("crypto");
                     }
 
-                    rate.setPropriety(getPropriety(entry.getKey()));
+                    try {
+                        if(favorites.get(entry.getKey()) != null) {
+
+
+                            rate.setFavourite(favorites.get(entry.getKey()));
+
+                        }
+                        else {
+                            rate.setFavourite(false);
+
+                        }
+
+                    }catch (java.lang.NullPointerException e){
+                        rate.setFavourite(false);
+                    }
                     rates.add(rate);
 
                     if (ifNoConection == false) {
@@ -161,6 +192,8 @@ public class RateRepository {
         }
 
     }
+
+
 
     /******** this function to get name of currency *********************/
     public static Set<Currency> getAllCurrencies() {
@@ -229,5 +262,15 @@ public class RateRepository {
     public void updateRate(Rate rate) {
         RateDAO rateDAO = db.rateDAO();
         rateDAO.update(rate);
+    }
+
+    public LiveData<ArrayList<Rate>> getFavorites(){
+        MutableLiveData mutableLiveData = new MutableLiveData<>();
+        RateDAO rateDAO = db.rateDAO();
+
+        mutableLiveData.setValue(rateDAO.getFavorites());
+
+        return mutableLiveData;
+
     }
 }

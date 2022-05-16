@@ -2,21 +2,34 @@ package com.example.rates.view;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.GravityInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.viewmodel.CreationExtras;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,22 +39,27 @@ import com.example.rates.R;
 import com.example.rates.model.entity.Rate;
 import com.example.rates.viewmodel.RateVM;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Observable;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Boolean ifGetData = false, exit = false, ifInAllCurrency = true;
-    private TextView txtDate, txtAllCurrency, txtCurrency, txtCrypto;
+    private TextView txtDate, txtAllCurrency, txtCurrency, txtCrypto, txtFavorites;
     private EditText base, rate;
     private AutoCompleteTextView autoCompleteTextView;
     private Button btnConvert;
+    private ImageButton options;
     private RateAdapter rateAdapter;
     private AlertDialog builder;
     private RateVM rateVM;
     private SwipeRefreshLayout swipeRefresh;
+    private NavigationView navigationView;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -51,20 +69,54 @@ public class MainActivity extends AppCompatActivity {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 //            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
 //        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
         setContentView(R.layout.rate_activity);
 
         rateVM = new RateVM(this);
 
         autoCompleteTextView = findViewById(R.id.menu);
         base = findViewById(R.id.base);
-        rate = findViewById(R.id.menu);
+        rate = findViewById(R.id.name_base);
         btnConvert = findViewById(R.id.btn_convert);
         txtDate = findViewById(R.id.date);
         txtAllCurrency = findViewById(R.id.all_currency);
         txtCurrency = findViewById(R.id.currency);
         txtCrypto = findViewById(R.id.cypto);
+        txtFavorites = findViewById(R.id.favorites);
         swipeRefresh = findViewById(R.id.swiperefresh);
         txtDate = findViewById(R.id.date);
+        options = findViewById(R.id.options);
+        mDrawerLayout =  findViewById(R.id.drawer);
+        navigationView = findViewById(R.id.navigationView);
+
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.lang);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         long millis = System.currentTimeMillis();
 
@@ -158,11 +210,14 @@ public class MainActivity extends AppCompatActivity {
                 updateUI(rateVM.filter("rate"));
                 txtCurrency.setTextSize(16);
                 txtCrypto.setTextSize(13);
+                txtFavorites.setTextSize(13);
                 txtAllCurrency.setTextSize(13);
 
                 txtCurrency.setTextColor(getResources().getColor(R.color.purple_200));
                 txtAllCurrency.setTextColor(getResources().getColor(R.color.black_2));
                 txtCrypto.setTextColor(getResources().getColor(R.color.black_2));
+                txtFavorites.setTextColor(getResources().getColor(R.color.black_2));
+
 
 
             }
@@ -179,10 +234,13 @@ public class MainActivity extends AppCompatActivity {
                 txtCurrency.setTextSize(13);
                 txtCrypto.setTextSize(13);
                 txtAllCurrency.setTextSize(16);
+                txtFavorites.setTextSize(13);
 
                 txtCurrency.setTextColor(getResources().getColor(R.color.black_2));
                 txtAllCurrency.setTextColor(getResources().getColor(R.color.purple_200));
                 txtCrypto.setTextColor(getResources().getColor(R.color.black_2));
+                txtFavorites.setTextColor(getResources().getColor(R.color.black_2));
+
 
             }
         });
@@ -197,15 +255,49 @@ public class MainActivity extends AppCompatActivity {
                 txtCurrency.setTextSize(13);
                 txtCrypto.setTextSize(16);
                 txtAllCurrency.setTextSize(13);
+                txtFavorites.setTextSize(13);
+
 
 
                 updateUI(rateVM.filter("crypto"));
                 txtCurrency.setTextColor(getResources().getColor(R.color.black_2));
                 txtAllCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtFavorites.setTextColor(getResources().getColor(R.color.black_2));
                 txtCrypto.setTextColor(getResources().getColor(R.color.purple_200));
             }
         });
 
+        /********* Display list of favorites **************************/
+        txtFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ifGetData = false;
+                ifInAllCurrency = false;
+                txtCurrency.setTextSize(13);
+                txtCrypto.setTextSize(13);
+                txtAllCurrency.setTextSize(13);
+                txtFavorites.setTextSize(16);
+                // Create the observer which updates the UI.
+                final Observer<ArrayList<Rate>> nameObserver = new Observer<ArrayList<Rate>>() {
+                    @Override
+                    public void onChanged(@Nullable final ArrayList<Rate> rates) {
+                        updateUI(rates);
+                    }
+                };
+
+                rateVM.getFavorites().observe(MainActivity.this, nameObserver);
+
+
+
+                updateUI(rateVM.filter("crypto"));
+                txtCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtAllCurrency.setTextColor(getResources().getColor(R.color.black_2));
+                txtCrypto.setTextColor(getResources().getColor(R.color.black_2));
+                txtFavorites.setTextColor(getResources().getColor(R.color.purple_200));
+
+
+            }
+        });
 
     }
 
@@ -221,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 _list);
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.menu);
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name_base);
 
         textView.setAdapter(adapter);
 
@@ -229,9 +321,8 @@ public class MainActivity extends AppCompatActivity {
 
     /********* Send data to RateAdapter to show list of rates *******************************/
     public void updateUI(ArrayList<Rate> rates) {
-        Log.println(Log.ASSERT, "", String.valueOf(rates.size()));
+
         if(rates.size() > 0){
-            Log.println(Log.ASSERT, "", "pokpop");
 
         builder.dismiss();
 
@@ -335,6 +426,29 @@ public class MainActivity extends AppCompatActivity {
 //                        | View.SYSTEM_UI_FLAG_IMMERSIVE
 //                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 //                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        Intent intent ;
+        switch (item.getItemId()){
+            case R.id.lang: intent= new Intent(this, ChangeBaseActivity.class); startActivity(intent);
+            case R.id.all_currency: Toast.makeText(MainActivity.this, "yemchy", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @NonNull
+    @Override
+    public CreationExtras getDefaultViewModelCreationExtras() {
+        return super.getDefaultViewModelCreationExtras();
     }
 }
 

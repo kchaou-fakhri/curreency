@@ -1,6 +1,5 @@
 package com.example.rates.model.data.local;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -25,4 +24,9 @@ public interface RateDAO {
 
     @Update
     void update(Rate rate);
+
+    @Query("SELECT * FROM rate where favourite = 1")
+    List<Rate> getFavorites();
+
+
 }

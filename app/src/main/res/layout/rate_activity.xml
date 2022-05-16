@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/bkg"
+    android:id="@+id/drawer"
+
     tools:context=".view.MainActivity"
     tools:visibility="visible">
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:menu="@menu/bottum_menu"
+        app:headerLayout="@layout/header_navigation_drawer"
+
+      />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/shape"
@@ -16,7 +35,7 @@
         android:layout_height="180dp"
 
         android:orientation="vertical"
-        android:background="#435bb9"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,21 +46,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
+
+            android:padding="5dp"
+            android:paddingRight="15dp"
             android:text="20 FEBRUARY 2022 - 11:26"
             android:textColor="@color/white"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/setting"
+            android:id="@+id/options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-
-            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="false"
+            android:layout_marginStart="13dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="13dp"
             android:background="#00FFFFFF"
-            android:src="@drawable/ic_settings"
+            android:src="@drawable/ic_menu"
             app:tint="@color/white" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,10 +82,10 @@
                 android:id="@+id/rate_value"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
 
                 android:gravity="center"
-                android:text="@string/select_currency"
+                android:text=""
                 android:textColor="#363739"
 
                 android:textStyle="bold" />
@@ -68,16 +95,32 @@
                 android:id="@+id/cypto"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/favorites"
                 android:gravity="center"
                 android:text="@string/crypto"
-                android:textSize="13sp"
-
-
                 android:textColor="#363739"
 
+
+                android:textSize="13sp"
+
                 />
+
+            <TextView
+                android:id="@+id/favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="Favorites"
+                android:textAllCaps="true"
+                android:textColor="#363739"
+                android:textSize="13sp"
+
+                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/currency"
@@ -87,10 +130,9 @@
                 android:layout_toLeftOf="@id/cypto"
                 android:gravity="center"
                 android:text="@string/currency"
-                android:textSize="13sp"
                 android:textColor="#363739"
-
-                />
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/all_currency"
@@ -100,14 +142,13 @@
                 android:layout_toLeftOf="@id/currency"
                 android:gravity="center"
                 android:text="@string/all"
+                android:textColor="@color/purple_200"
                 android:textSize="16sp"
-
-                android:textColor="#435bb9"
+                android:textStyle="bold"
 
                 />
         </RelativeLayout>
     </RelativeLayout>
-
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -115,22 +156,21 @@
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/shape"
-        app:layout_constraintVertical_bias="0.005"
-      >
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rateRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-       />
+        app:layout_constraintVertical_bias="0.005">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rateRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
 
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 
@@ -148,7 +188,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="80dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
 
@@ -164,7 +204,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/base"
-                android:background="@drawable/value_rate_shape"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"
@@ -181,13 +220,13 @@
 
             android:layout_marginLeft="10dp"
 
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             app:helperText=""
             app:helperTextTextColor="#dd0000"
             app:layout_constraintBottom_toBottomOf="@+id/textField"
             app:layout_constraintEnd_toStartOf="@+id/btn_convert"
             app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
 
             app:layout_constraintStart_toEndOf="@+id/textField"
             app:layout_constraintTop_toTopOf="@+id/textField"
@@ -195,15 +234,14 @@
 
 
             <AutoCompleteTextView
-                android:id="@+id/menu"
+                android:id="@+id/name_base"
 
-                android:background="@drawable/value_rate_shape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                android:focusableInTouchMode="true"
                 android:cursorVisible="false"
                 android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:inputType="none"
                 android:text="USD"
                 android:textAlignment="center" />
 
@@ -233,3 +271,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
