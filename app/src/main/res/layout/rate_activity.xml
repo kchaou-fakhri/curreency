@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bkg"
+    android:background="@color/purple_200"
     android:id="@+id/drawer"
 
     tools:context=".view.MainActivity"
@@ -213,7 +213,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/label_menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 

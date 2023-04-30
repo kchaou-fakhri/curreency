@@ -106,18 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         long millis = System.currentTimeMillis();
 
         /********* Show Progress Bar when callApi   ****************/
@@ -306,9 +294,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ArrayList<String> _list = new ArrayList<String>();
 
-        for (Rate item : list) {
-            _list.add(item.getId());
+        for (int i = list.size()-1; i>=0; i--){
+            _list.add(list.get(i).getId());
         }
+//        for (Rate item : list) {
+//            _list.add(item.getId());
+//        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
